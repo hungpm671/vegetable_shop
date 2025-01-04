@@ -1,0 +1,8 @@
+.pagination-feedback-item {
+  padding-inline: 8px;
+}
+
+.pagination-feedback-item.selected {
+  font-weight: 700;
+  border-bottom: 2px solid #ccc;
+}

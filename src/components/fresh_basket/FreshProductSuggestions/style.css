@@ -1,0 +1,27 @@
+.product_suggestion-title {
+  border-top: 1px solid transparent;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.product_suggestion-title:hover {
+  border-top: 1px solid rgb(102, 204, 0);
+  transition: all 0.3s ease-in-out;
+}
+
+.active-title {
+  border-top: 1px solid rgb(102, 204, 0);
+}
+
+.product-suggesstion_btn {
+  display: none;
+  transition: all 0.3s ease;
+}
+
+.product-suggesstion:hover .product-suggesstion_btn {
+  display: block;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transition: all 0.3s ease;
+}
