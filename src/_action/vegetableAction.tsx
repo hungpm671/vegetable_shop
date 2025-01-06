@@ -8,7 +8,10 @@ export async function getVegetableFruit() {
     await connectToMongo();
     const data = JSON.parse(JSON.stringify(await VegetableFruitModel.find()));
     return data;
-  } catch (error: any) {
-    return { errorMsg: error.message };
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      return { errorMsg: error.message };
+    }
+    return { errorMsg: "An unknown error occurred" };
   }
 }

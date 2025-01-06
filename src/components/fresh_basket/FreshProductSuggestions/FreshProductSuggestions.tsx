@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Flex, Grid, Heading } from "@chakra-ui/react";
+import { Flex, Grid, Heading } from "@chakra-ui/react";
 import "./style.css";
 import { useFreshBasketStore } from "@/lib/stores/fresh-basket";
 import { useQuery } from "@tanstack/react-query";

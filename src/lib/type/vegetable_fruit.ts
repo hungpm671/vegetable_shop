@@ -1,7 +1,6 @@
 import { ObjectId } from "mongoose";
 
 export interface VegetableFruit {
-  filter: any;
   _id: ID;
   name: string;
   type: string;

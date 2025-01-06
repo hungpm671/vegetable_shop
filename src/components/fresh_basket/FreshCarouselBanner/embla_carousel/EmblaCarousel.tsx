@@ -110,7 +110,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
       .on("reInit", tweenParallax)
       .on("scroll", tweenParallax)
       .on("slideFocus", tweenParallax);
-  }, [emblaApi, tweenParallax]);
+  }, [emblaApi, tweenParallax, setTweenNodes, setTweenFactor]);
 
   return (
     <Box className="embla" position={"relative"}>

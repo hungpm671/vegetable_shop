@@ -23,7 +23,7 @@ export const Thumb: React.FC<PropType> = (props) => {
         className="embla-thumbs__slide__number embla-news-thumbs__slide__number relative"
       >
         <Flex flexDir={"column"}>
-          <Image src={value.image} objectFit={"cover"} />
+          <Image src={value.image} objectFit={"cover"} alt="" />
           <Flex
             borderImage={"fill 0 linear-gradient(#0001, #000)"}
             position={"absolute"}

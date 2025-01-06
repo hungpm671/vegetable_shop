@@ -13,14 +13,16 @@ export default function ProductsFilter() {
     setFilterVegetableFruits,
   } = useFreshBasketStore((state) => state);
 
-  const handleFilterChange = (value: string | any) => {
-    setFilter(value.target.value);
-    setFilterVegetableFruits(value.target.value, filterPrice);
+  const handleFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setFilter(value);
+    setFilterVegetableFruits(value, filterPrice);
   };
 
-  const handleFilterPrice = (value: string | any) => {
-    setFilterPrice(value.target.value);
-    setFilterVegetableFruits(filter, value.target.value);
+  const handleFilterPrice = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setFilterPrice(value);
+    setFilterVegetableFruits(filter, value);
   };
 
   return (

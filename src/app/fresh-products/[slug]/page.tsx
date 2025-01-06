@@ -28,7 +28,12 @@ export default function FreshProductItem() {
   const { slug } = params;
   const { data, isLoading } = useQuery({
     queryKey: ["courses", slug],
-    queryFn: async () => await getVegetableFruitItem(slug),
+    queryFn: async () => {
+      if (typeof slug === "string") {
+        return await getVegetableFruitItem(slug);
+      }
+      throw new Error("Invalid slug value");
+    },
   });
 
   if (isLoading) {
@@ -58,7 +63,7 @@ export default function FreshProductItem() {
           borderRadius={5}
           padding={"10px"}
         >
-          <Image src={data[0]?.image} />
+          <Image src={data[0]?.image} alt={data?.name} />
         </GridItem>
 
         <GridItem className="flex" flexDir={"column"} gap={1}>

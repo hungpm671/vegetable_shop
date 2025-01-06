@@ -1,13 +1,5 @@
 import React from "react";
-import {
-  Box,
-  Flex,
-  Grid,
-  GridItem,
-  Heading,
-  Image,
-  Text,
-} from "@chakra-ui/react";
+import { Flex, Grid, GridItem, Heading, Image, Text } from "@chakra-ui/react";
 import { FaHandsHelping, FaSeedling, FaShippingFast } from "react-icons/fa";
 import { BiSolidLike } from "react-icons/bi";
 
@@ -46,7 +38,10 @@ export default function FreshIntro() {
         </GridItem>
 
         <GridItem rowSpan={2} colSpan={1} bg="green.100">
-          <Image src="https://techmaster-vietnam.github.io/thuc-pham-huu-co/image/introduce.jpg" />
+          <Image
+            src="https://techmaster-vietnam.github.io/thuc-pham-huu-co/image/introduce.jpg"
+            alt=""
+          />
         </GridItem>
 
         <GridItem

@@ -49,7 +49,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
               <div className="embla__slide__number embla-news__slide__number">
                 <Grid templateColumns="repeat(2, 1fr)" gap="3">
                   <GridItem className="flex" justifyContent={"center"}>
-                    <Image src={value.image} objectFit={"cover"} />
+                    <Image src={value.image} objectFit={"cover"} alt="" />
                   </GridItem>
                   <GridItem
                     className="flex"

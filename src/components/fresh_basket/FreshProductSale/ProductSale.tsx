@@ -5,7 +5,6 @@ import EmblaCarousel from "./EmblaCarousel";
 import { EmblaOptionsType } from "embla-carousel";
 import { Flex, Heading } from "@chakra-ui/react";
 import "./style.css";
-import { useFreshBasketStore } from "@/lib/stores/fresh-basket";
 import { useQuery } from "@tanstack/react-query";
 import { getVegetableFruit } from "@/_action/vegetableAction";
 

@@ -24,6 +24,7 @@
     "react-dom": "^19.0.0",
     "react-icons": "^5.4.0",
     "react-paginate": "^8.2.0",
+    "vercel": "^39.2.5",
     "zustand": "^5.0.2"
   },
   "devDependencies": {

@@ -3,14 +3,17 @@
 import connectToMongo from "@/config/database";
 import VegetableFruitModel from "@/models/vegetable_fruitModel";
 
-export async function getVegetableFruitItem(params: string | any) {
+export async function getVegetableFruitItem(params: string) {
   try {
     await connectToMongo();
     const data = JSON.parse(
       JSON.stringify(await VegetableFruitModel.find({ _id: params }))
     );
     return data;
-  } catch (error: any) {
-    return { errorMsg: error.message };
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      return { errorMsg: error.message };
+    }
+    return { errorMsg: "An unknown error occurred" };
   }
 }

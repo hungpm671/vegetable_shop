@@ -1,8 +1,6 @@
-import { Button, Flex, Heading, Image, Input, Text } from "@chakra-ui/react";
+import { Button, Flex, Heading, Image, Text } from "@chakra-ui/react";
 import React from "react";
 import { MdDeleteForever } from "react-icons/md";
-import SelectByWeight from "../../../../utils/SelectByWeight";
-import { VegetableFruit } from "@/lib/type/vegetable_fruit";
 import { VegetableFruitProp } from "@/lib/stores/fresh-basket";
 
 export default function ProductCartItem({

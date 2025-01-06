@@ -14,7 +14,7 @@ import { IoMdMenu } from "react-icons/io";
 import { IoCloseSharp } from "react-icons/io5";
 import { RiSeedlingFill } from "react-icons/ri";
 import FreshProductCart from "../FreshProductCart/FreshProductCart";
-import { Link } from "@chakra-ui/react";
+import { Image, Link } from "@chakra-ui/react";
 
 // const navigation = [
 //   { name: "Trang chủ", href: "/", current: true },
@@ -94,7 +94,7 @@ export default function FreshNavbar() {
                 <MenuButton className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                   <span className="absolute -inset-1.5" />
                   <span className="sr-only">Open user menu</span>
-                  <img
+                  <Image
                     alt=""
                     src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                     className="size-8 rounded-full"

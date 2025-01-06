@@ -1,12 +1,4 @@
-import {
-  Box,
-  Flex,
-  Grid,
-  GridItem,
-  Heading,
-  Link,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Grid, GridItem, Heading, Link, Text } from "@chakra-ui/react";
 import React from "react";
 import { FaPhone, FaSquareFacebook } from "react-icons/fa6";
 import { IoHome, IoMail } from "react-icons/io5";

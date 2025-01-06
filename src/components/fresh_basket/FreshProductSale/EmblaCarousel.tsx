@@ -7,8 +7,7 @@ import {
 } from "./EmblaCarouselArrowButtons";
 import useEmblaCarousel from "embla-carousel-react";
 import { VegetableFruit } from "@/lib/type/vegetable_fruit";
-import { Button, Flex, Heading, Image, Text } from "@chakra-ui/react";
-import CalculateSalePrice from "../../../../utils/CalculateSalePrice";
+import { Flex } from "@chakra-ui/react";
 import ProductSaleItem from "./ProductSaleItem";
 
 type PropType = {

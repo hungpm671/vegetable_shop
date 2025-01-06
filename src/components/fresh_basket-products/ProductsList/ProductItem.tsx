@@ -2,7 +2,6 @@ import { Button, Card, Flex, GridItem, Image, Text } from "@chakra-ui/react";
 import { Tooltip } from "@/components/ui/tooltip";
 import { TiShoppingCart } from "react-icons/ti";
 import { FaHeart } from "react-icons/fa6";
-import { FaHeartBroken } from "react-icons/fa";
 import { MdOutlineComment } from "react-icons/md";
 import Link from "next/link";
 import { VegetableFruit } from "@/lib/type/vegetable_fruit";

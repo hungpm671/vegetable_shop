@@ -177,7 +177,7 @@ export const useFreshBasketStore = create<FreshBasketState>()((set) => ({
 
   // filter vegetables
   type: "fruit",
-  setType: (type: string) => set((state) => ({ type })),
+  setType: (type: string) => set(() => ({ type })),
 
   filter: "",
   setFilter: (filter: string) => set({ filter }),

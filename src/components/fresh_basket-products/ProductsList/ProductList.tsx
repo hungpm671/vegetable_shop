@@ -21,7 +21,7 @@ export default function ProductList() {
     if (isSuccess && data) {
       setVegetableFruits(data);
     }
-  }, [isSuccess, data]);
+  }, [isSuccess, data, setVegetableFruits]);
 
   if (isLoading) {
     return (
