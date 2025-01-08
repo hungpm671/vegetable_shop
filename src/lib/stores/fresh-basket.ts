@@ -103,6 +103,13 @@ const feedback = [
   },
 ];
 
+const search_checkox = [
+  { label: "Rau củ", checked: false, value: "vegetable" },
+  { label: "Thực phẩm khô", checked: false, value: "dry_food" },
+  { label: "Hoa quả", checked: false, value: "fruit" },
+  // { label: "Giá", checked: false, value: "price_sort" },
+];
+
 export type NavigationProp = {
   name: string;
   href: string;
@@ -138,6 +145,12 @@ export type FeedbackProp = {
   created_at: string;
 };
 
+export type SearchCheckbox = {
+  label: string;
+  checked: boolean;
+  value: string;
+};
+
 interface FreshBasketState {
   navigation: NavigationProp[];
   setNavigation: (href: string) => void;
@@ -157,11 +170,23 @@ interface FreshBasketState {
   filterVegetableFruits: VegetableFruit[];
   setFilterVegetableFruits: (filter: string, filterPrice: string) => void;
 
+  inputValueSearch: string;
+  setInputValueSearch: (value: string) => void;
+
   fresh_news: FreshNews[];
 
   feedback: FeedbackProp[];
 
   userShoppingCart: VegetableFruit[];
+
+  filterSearchType: SearchCheckbox[];
+  setFilterSearchType: (index: number, checked: boolean) => void;
+
+  filterArrayConditions: string[];
+  setFilterArrayConditions: (conditions: string, checked: boolean) => void;
+
+  filterConditions: VegetableFruit[];
+  setFilterConditions: (data: VegetableFruit[]) => void;
 }
 
 export const useFreshBasketStore = create<FreshBasketState>()((set) => ({
@@ -189,14 +214,14 @@ export const useFreshBasketStore = create<FreshBasketState>()((set) => ({
     }),
 
   vegetables_fruits: [],
-
-  filterVegetableFruits: [],
   setVegetableFruits: (data: VegetableFruit[]) =>
     set({
       vegetables_fruits: data,
       filterVegetableFruits: data,
+      filterConditions: data,
     }),
 
+  filterVegetableFruits: [],
   setFilterVegetableFruits: (filter: string, filterPrice: string) =>
     set((state) => ({
       filterVegetableFruits: state.vegetables_fruits.filter(
@@ -207,11 +232,47 @@ export const useFreshBasketStore = create<FreshBasketState>()((set) => ({
       ),
     })),
 
+  inputValueSearch: "",
+  setInputValueSearch: (value: string) =>
+    set({
+      inputValueSearch: value,
+    }),
+
   fresh_news: fresh_news,
 
   feedback: feedback,
 
   userShoppingCart: [],
+
+  filterSearchType: search_checkox,
+  setFilterSearchType: (index, checked) =>
+    set((state) => {
+      const newValues = [...state.filterSearchType];
+      newValues[index] = { ...newValues[index], checked: !!checked };
+      return { filterSearchType: newValues };
+    }),
+
+  filterArrayConditions: [],
+  setFilterArrayConditions: (conditions: string, checked: boolean) =>
+    set((state) => ({
+      filterArrayConditions: checked
+        ? state.filterArrayConditions.includes(conditions)
+          ? state.filterArrayConditions
+          : [...state.filterArrayConditions, conditions]
+        : state.filterArrayConditions.filter((item) => item !== conditions),
+    })),
+
+  filterConditions: [],
+  setFilterConditions: (data: VegetableFruit[]) =>
+    set((state) => ({
+      filterConditions: data.filter((fruit) =>
+        state.filterArrayConditions && state.filterArrayConditions.length > 0
+          ? state.filterArrayConditions.some(
+              (condition) => fruit.type === condition
+            )
+          : true
+      ),
+    })),
 }));
 
 const filterPriceFunct = (filterPrice: string, fruit: VegetableFruit) => {

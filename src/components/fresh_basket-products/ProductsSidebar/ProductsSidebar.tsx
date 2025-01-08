@@ -1,8 +1,9 @@
-import { Flex, Heading, Input } from "@chakra-ui/react";
+import { Flex, Heading } from "@chakra-ui/react";
 import React from "react";
-import { InputGroup } from "@/components/ui/input-group";
-import { LuSearch } from "react-icons/lu";
+
 import ProductsFilter from "./ProductsFilter";
+import ProductSearch from "./ProductSearch";
+import "./style.css";
 
 export default function ProductsSidebar() {
   return (
@@ -22,14 +23,7 @@ export default function ProductsSidebar() {
         Tìm kiếm theo
       </Heading>
 
-      <InputGroup
-        flex="1"
-        startElement={<LuSearch />}
-        border={"1px solid #ccc"}
-        borderRadius={"4px"}
-      >
-        <Input placeholder="Search..." />
-      </InputGroup>
+      <ProductSearch />
 
       {/* List products sidebar */}
       <ProductsFilter />

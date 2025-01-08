@@ -5,6 +5,7 @@ import { FaHeart } from "react-icons/fa6";
 import { MdOutlineComment } from "react-icons/md";
 import Link from "next/link";
 import { VegetableFruit } from "@/lib/type/vegetable_fruit";
+import CalculateSalePrice from "../../../../utils/CalculateSalePrice";
 
 export const ProductItem = ({ value }: { value: VegetableFruit }) => {
   return (
@@ -40,9 +41,23 @@ export const ProductItem = ({ value }: { value: VegetableFruit }) => {
             <Card.Title textTransform={"capitalize"} fontWeight={700}>
               {value.name}
             </Card.Title>
-            <Text textStyle="sm" fontWeight="medium" letterSpacing="tight">
-              {value.price_per_kg}₫
-            </Text>
+            <Flex alignItems={"center"} gap={3}>
+              <Text fontSize={14} color={"red.500"} fontWeight={600}>
+                {Intl.NumberFormat("vi-VN").format(
+                  CalculateSalePrice(value.price_per_kg, value.discount)
+                )}
+                ₫/kg
+              </Text>
+
+              {value.discount !== 0 && (
+                <Text as={"s"} fontSize={12} color={"gray.400"}>
+                  {Intl.NumberFormat("vi-VN").format(
+                    Number(value.price_per_kg)
+                  )}
+                  ₫/kg
+                </Text>
+              )}
+            </Flex>
           </Card.Body>
           <Card.Footer
             gap="2"
