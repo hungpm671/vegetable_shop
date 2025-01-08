@@ -28,7 +28,7 @@ export default function FreshProductSearch() {
   useEffect(() => {
     if (isSuccess && data) {
       const filteredData = data?.filter((item: VegetableFruit) =>
-        item.name.toLowerCase().includes(search?.toLowerCase()!)
+        item.name.toLowerCase().includes(search?.toLowerCase() as string)
       );
       setVegetableFruits(filteredData);
     }
