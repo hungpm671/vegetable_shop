@@ -32,7 +32,7 @@ export default function FreshProductSearch() {
       );
       setVegetableFruits(filteredData);
     }
-  }, [isSuccess, data, setVegetableFruits]);
+  }, [isSuccess, data, setVegetableFruits, search]);
 
   if (isLoading) return "Loading...";
 

@@ -2,15 +2,7 @@
 
 import { Stack } from "@chakra-ui/react";
 import { Checkbox } from "@/components/ui/checkbox";
-import { useState } from "react";
 import { useFreshBasketStore } from "@/lib/stores/fresh-basket";
-
-// const initialValues = [
-//   { label: "Rau củ", checked: false, value: "vegetable" },
-//   { label: "Thực phẩm khô", checked: false, value: "dry_food" },
-//   { label: "Hoa quả", checked: false, value: "fruit" },
-//   // { label: "Giá", checked: false, value: "price_sort" },
-// ];
 
 const FreshProductFilter = () => {
   const {
@@ -37,8 +29,6 @@ const FreshProductFilter = () => {
         setFilterSearchType(index, !!e.checked);
         setFilterArrayConditions(item.value, !!e.checked);
         setFilterConditions(vegetables_fruits);
-
-        console.log(!!e.checked);
       }}
     >
       {item.label}
@@ -64,11 +54,11 @@ const FreshProductFilter = () => {
         colorPalette={"black"}
         variant={"subtle"}
         checked={indeterminate ? "indeterminate" : allChecked}
-        onCheckedChange={(e) => {
-          // setValues((current) =>
-          //   current.map((value) => ({ ...value, checked: !!e.checked }))
-          // );
-        }}
+        // onCheckedChange={(e) => {
+        //   setValues((current) =>
+        //     current.map((value) => ({ ...value, checked: !!e.checked }))
+        //   );
+        // }}
       >
         Tất cả
       </Checkbox>

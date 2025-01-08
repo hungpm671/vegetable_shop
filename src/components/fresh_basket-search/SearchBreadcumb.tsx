@@ -46,7 +46,7 @@ export const SearchBreadcumb = ({
           gap={2}
           fontWeight={600}
         >
-          Kết quả tìm kiếm <span className="underline">"{params}"</span>
+          Kết quả tìm kiếm "<span className="underline">{params}</span>"
         </BreadcrumbCurrentLink>
       </BreadcrumbRoot>
 
