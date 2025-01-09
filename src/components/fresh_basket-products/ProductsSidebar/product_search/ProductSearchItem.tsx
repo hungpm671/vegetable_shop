@@ -1,10 +1,10 @@
 import React from "react";
 import { Flex, Image, Link, Text } from "@chakra-ui/react";
 import { VegetableFruit } from "@/lib/type/vegetable_fruit";
-import CalculateSalePrice from "../../../../utils/CalculateSalePrice";
 import { useQuery } from "@tanstack/react-query";
 import { getVegetableFruit } from "@/_action/vegetableAction";
 import { useFreshBasketStore } from "@/lib/stores/fresh-basket";
+import CalculateSalePrice from "../../../../../utils/CalculateSalePrice";
 
 export default function ProductSearchItem() {
   const { inputValueSearch } = useFreshBasketStore((state) => state);

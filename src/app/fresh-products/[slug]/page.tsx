@@ -27,9 +27,8 @@ import { FaHeart, FaSpinner } from "react-icons/fa6";
 import ProductSale from "@/components/fresh_basket/FreshProductSale/ProductSale";
 import { Textarea } from "@chakra-ui/react";
 
-import { Card, HStack, Stack, Strong } from "@chakra-ui/react";
+import { Card, HStack, Stack } from "@chakra-ui/react";
 import { Avatar } from "@/components/ui/avatar";
-import { LuCheck, LuX } from "react-icons/lu";
 
 export default function FreshProductItem() {
   const params = useParams();
