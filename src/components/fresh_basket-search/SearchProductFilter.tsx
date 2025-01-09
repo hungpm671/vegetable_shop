@@ -7,11 +7,12 @@ import { useFreshBasketStore } from "@/lib/stores/fresh-basket";
 const FreshProductFilter = () => {
   const {
     vegetables_fruits,
-    filterArrayConditions,
     filterSearchType,
     setFilterSearchType,
     setFilterConditions,
     setFilterArrayConditions,
+    setFilterAllSearchType,
+    setFilterAllArrayConditions,
   } = useFreshBasketStore((state) => state);
 
   const allChecked = filterSearchType.every((value) => value.checked);
@@ -35,8 +36,6 @@ const FreshProductFilter = () => {
     </Checkbox>
   ));
 
-  console.log(filterArrayConditions);
-
   return (
     <Stack
       align="flex-start"
@@ -54,11 +53,11 @@ const FreshProductFilter = () => {
         colorPalette={"black"}
         variant={"subtle"}
         checked={indeterminate ? "indeterminate" : allChecked}
-        // onCheckedChange={(e) => {
-        //   setValues((current) =>
-        //     current.map((value) => ({ ...value, checked: !!e.checked }))
-        //   );
-        // }}
+        onCheckedChange={(e) => {
+          setFilterAllSearchType(!!e.checked);
+          setFilterAllArrayConditions(!!e.checked);
+          setFilterConditions(vegetables_fruits);
+        }}
       >
         Tất cả
       </Checkbox>

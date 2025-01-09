@@ -4,9 +4,9 @@ import { VegetableFruit } from "../type/vegetable_fruit";
 const navigation = [
   { name: "Trang chủ", href: "/", current: true },
   { name: "Sản phẩm", href: "/fresh-products", current: false },
-  { name: "Giói thiệu", href: "#about", current: false },
-  { name: "Tin tức", href: "#news", current: false },
-  { name: "Liên hệ", href: "#contact", current: false },
+  { name: "Giói thiệu", href: "/#about", current: false },
+  { name: "Tin tức", href: "/#news", current: false },
+  { name: "Liên hệ", href: "/#contact", current: false },
 ];
 
 const fresh_news = [
@@ -107,7 +107,6 @@ const search_checkox = [
   { label: "Rau củ", checked: false, value: "vegetable" },
   { label: "Thực phẩm khô", checked: false, value: "dry_food" },
   { label: "Hoa quả", checked: false, value: "fruit" },
-  // { label: "Giá", checked: false, value: "price_sort" },
 ];
 
 export type NavigationProp = {
@@ -185,6 +184,9 @@ interface FreshBasketState {
   filterArrayConditions: string[];
   setFilterArrayConditions: (conditions: string, checked: boolean) => void;
 
+  setFilterAllSearchType: (checked: boolean) => void;
+  setFilterAllArrayConditions: (checked: boolean) => void;
+
   filterConditions: VegetableFruit[];
   setFilterConditions: (data: VegetableFruit[]) => void;
 }
@@ -200,19 +202,20 @@ export const useFreshBasketStore = create<FreshBasketState>()((set) => ({
       ),
     })),
 
-  // filter vegetables
+  // filter vegetables based on conditions
   type: "fruit",
   setType: (type: string) => set(() => ({ type })),
 
-  filter: "",
+  filter: "all",
   setFilter: (filter: string) => set({ filter }),
 
-  filterPrice: "",
+  filterPrice: "all",
   setFilterPrice: (price: string) =>
     set({
       filterPrice: price,
     }),
 
+  // initial vegetable array
   vegetables_fruits: [],
   setVegetableFruits: (data: VegetableFruit[]) =>
     set({
@@ -221,17 +224,19 @@ export const useFreshBasketStore = create<FreshBasketState>()((set) => ({
       filterConditions: data,
     }),
 
+  // filter vegetables based on price range & type
   filterVegetableFruits: [],
   setFilterVegetableFruits: (filter: string, filterPrice: string) =>
     set((state) => ({
       filterVegetableFruits: state.vegetables_fruits.filter(
         (fruit) =>
-          (filter === "" ||
+          (filter === "all" ||
             fruit.type.toLowerCase().includes(filter.toLowerCase())) &&
           filterPriceFunct(filterPrice, fruit)
       ),
     })),
 
+  // initial value search input
   inputValueSearch: "",
   setInputValueSearch: (value: string) =>
     set({
@@ -244,6 +249,7 @@ export const useFreshBasketStore = create<FreshBasketState>()((set) => ({
 
   userShoppingCart: [],
 
+  // filter vegetables based on checkbox
   filterSearchType: search_checkox,
   setFilterSearchType: (index, checked) =>
     set((state) => {
@@ -252,6 +258,7 @@ export const useFreshBasketStore = create<FreshBasketState>()((set) => ({
       return { filterSearchType: newValues };
     }),
 
+  // filter vegetables based on search conditions
   filterArrayConditions: [],
   setFilterArrayConditions: (conditions: string, checked: boolean) =>
     set((state) => ({
@@ -260,6 +267,24 @@ export const useFreshBasketStore = create<FreshBasketState>()((set) => ({
           ? state.filterArrayConditions
           : [...state.filterArrayConditions, conditions]
         : state.filterArrayConditions.filter((item) => item !== conditions),
+    })),
+
+  // filter vegetables based on all checkbox
+  setFilterAllSearchType: (checked) =>
+    set((state) => ({
+      filterSearchType: state.filterSearchType.map((value) => ({
+        ...value,
+        checked: !!checked,
+      })),
+    })),
+
+  setFilterAllArrayConditions: (checked) =>
+    set((state) => ({
+      filterArrayConditions: checked
+        ? state.filterSearchType
+            .filter((value) => "value" in value)
+            .map((value) => value.value)
+        : [],
     })),
 
   filterConditions: [],

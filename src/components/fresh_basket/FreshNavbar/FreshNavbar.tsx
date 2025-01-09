@@ -16,14 +16,6 @@ import { RiSeedlingFill } from "react-icons/ri";
 import FreshProductCart from "../FreshProductCart/FreshProductCart";
 import { Image, Link } from "@chakra-ui/react";
 
-// const navigation = [
-//   { name: "Trang chủ", href: "/", current: true },
-//   { name: "Sản phẩm", href: "/fresh-products", current: false },
-//   { name: "Giói thiệu", href: "#", current: false },
-//   { name: "Tin tức", href: "#", current: false },
-//   { name: "Liên hệ", href: "#", current: false },
-// ];
-
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }

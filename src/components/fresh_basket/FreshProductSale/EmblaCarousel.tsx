@@ -43,7 +43,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
           alignItems={"center"}
           justifyContent={"space-between"}
           position={"absolute"}
-          top={"50%"}
+          top={0}
           right={0}
           left={0}
           className="embla__buttons-product_sale"

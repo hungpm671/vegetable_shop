@@ -22,6 +22,14 @@ import {
 } from "@/components/ui/breadcrumb";
 import { IoMdHome } from "react-icons/io";
 import { MdStore } from "react-icons/md";
+import { EmptyState } from "@/components/ui/empty-state";
+import { FaHeart, FaSpinner } from "react-icons/fa6";
+import ProductSale from "@/components/fresh_basket/FreshProductSale/ProductSale";
+import { Textarea } from "@chakra-ui/react";
+
+import { Card, HStack, Stack, Strong } from "@chakra-ui/react";
+import { Avatar } from "@/components/ui/avatar";
+import { LuCheck, LuX } from "react-icons/lu";
 
 export default function FreshProductItem() {
   const params = useParams();
@@ -36,9 +44,16 @@ export default function FreshProductItem() {
     },
   });
 
-  if (isLoading) {
-    return "Loading...";
-  }
+  if (isLoading)
+    return (
+      <Flex className="mx-auto max-w-7xl" mt={"64px"} mb={50}>
+        <EmptyState
+          icon={<FaSpinner className="animate-spin text-blue-500 text-4xl" />}
+          title="Đang tìm kiếm kết quả..."
+          description="Chúng tôi đang xử lý thông tin và sẽ mang đến câu trả lời cho bạn ngay khi có thể. Vui lòng đợi trong giây lát!"
+        />
+      </Flex>
+    );
 
   return (
     <Flex className="mx-auto max-w-7xl" mt={"64px"} mb={50} flexDir={"column"}>
@@ -51,19 +66,41 @@ export default function FreshProductItem() {
           <MdStore />
           Cửa hàng
         </BreadcrumbLink>
-        <BreadcrumbCurrentLink color={"black"}>
-          {data[0].name}
+        <BreadcrumbCurrentLink
+          color={"black"}
+          textTransform={"capitalize"}
+          fontWeight={600}
+        >
+          {data[0]?.name}
         </BreadcrumbCurrentLink>
       </BreadcrumbRoot>
 
-      <Grid templateColumns="repeat(2, 1fr)" flex={1} mt={"10px"} gap={5}>
+      <Grid
+        templateColumns="repeat(2, 1fr)"
+        flex={1}
+        marginBlock={"20px"}
+        gap={5}
+      >
         <GridItem
           className="flex border"
           justifyContent={"center"}
           borderRadius={5}
           padding={"10px"}
+          position={"relative"}
         >
           <Image src={data[0]?.image} alt={data?.name} />
+
+          <Flex
+            position={"absolute"}
+            top={0}
+            right={0}
+            padding={"15px"}
+            color={"gray.400"}
+            className="hover:text-red-500"
+            cursor={"pointer"}
+          >
+            <FaHeart />
+          </Flex>
         </GridItem>
 
         <GridItem className="flex" flexDir={"column"} gap={1}>
@@ -115,6 +152,52 @@ export default function FreshProductItem() {
           <Text>{data[0].description}</Text>
         </GridItem>
       </Grid>
+
+      <Flex flexDir={"column"} mb={30}>
+        <Heading
+          as={"h5"}
+          fontSize={16}
+          fontWeight={700}
+          textTransform={"uppercase"}
+        >
+          Đánh giá sản phẩm
+        </Heading>
+
+        <Textarea
+          placeholder="Comment..."
+          border={"1px solid #ccc"}
+          padding={"5px"}
+        />
+
+        <Flex flexDir={"column"} gap={2} paddingBlock={5}>
+          {[1, 2, 3].map((value, index) => (
+            <Card.Root className="shadow-lg" key={index}>
+              <Card.Body bgColor={"white"}>
+                <HStack mb="2" gap="3">
+                  <Avatar
+                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                    name="Nate Foss"
+                  />
+                  <Stack gap="0">
+                    <Text fontWeight="semibold" textStyle="sm" color={"black"}>
+                      Nate Foss
+                    </Text>
+                    <Text color="fg.muted" textStyle="sm">
+                      @natefoss
+                    </Text>
+                  </Stack>
+                </HStack>
+                <Card.Description>
+                  Nate Foss has requested to join your team. You can approve or
+                  decline their request.
+                </Card.Description>
+              </Card.Body>
+            </Card.Root>
+          ))}
+        </Flex>
+      </Flex>
+
+      <ProductSale title="Sản phẩm liên quan" />
     </Flex>
   );
 }

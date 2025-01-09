@@ -8,14 +8,19 @@ import { getVegetableFruit } from "@/_action/vegetableAction";
 import { VegetableFruit } from "@/lib/type/vegetable_fruit";
 import ProductSuggestionItem from "./ProductSuggestionItem";
 import SuggestionSelected from "./SuggestionSelected";
+import WaitingLoading from "../../../../utils/WaitingLoading";
 
 export default function FreshProductSuggestions() {
   const { type } = useFreshBasketStore((state) => state);
 
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["courses"],
     queryFn: async () => await getVegetableFruit(),
   });
+
+  if (isLoading) {
+    return <WaitingLoading />;
+  }
 
   return (
     <Flex flexDir={"column"} marginBlock={50}>

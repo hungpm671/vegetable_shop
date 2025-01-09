@@ -11,6 +11,7 @@
 
 .active-title {
   border-top: 1px solid rgb(102, 204, 0);
+  font-weight: 700;
 }
 
 .product-suggesstion_btn {

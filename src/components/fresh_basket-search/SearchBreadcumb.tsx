@@ -36,7 +36,7 @@ export const SearchBreadcumb = ({
         <BreadcrumbLink href="/">
           <IoMdHome /> Trang chủ
         </BreadcrumbLink>
-        <BreadcrumbLink href="/">
+        <BreadcrumbLink href="/fresh-products">
           <MdStore /> Cửa hàng
         </BreadcrumbLink>
         <BreadcrumbCurrentLink

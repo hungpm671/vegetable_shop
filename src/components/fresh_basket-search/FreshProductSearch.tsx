@@ -11,6 +11,7 @@ import { ProductItem } from "../fresh_basket-products/ProductsList/ProductItem";
 import SearchProductEmpty from "./SearchProductEmpty";
 import "./style.css";
 import { useFreshBasketStore } from "@/lib/stores/fresh-basket";
+import WaitingLoading from "../../../utils/WaitingLoading";
 
 export default function FreshProductSearch() {
   const { filterConditions, setVegetableFruits } = useFreshBasketStore(
@@ -34,14 +35,13 @@ export default function FreshProductSearch() {
     }
   }, [isSuccess, data, setVegetableFruits, search]);
 
-  if (isLoading) return "Loading...";
+  if (isLoading) return <WaitingLoading />;
 
   return (
     <>
       <SearchBreadcumb params={search} amount={filterConditions?.length} />
-
       {filterConditions?.length ? (
-        <Grid templateColumns={"repeat(3, 1fr)"} gap={5}>
+        <Grid templateColumns={"repeat(4, 1fr)"} gap={5}>
           {filterConditions?.map((value: VegetableFruit, index: number) => (
             <ProductItem key={index} value={value} />
           ))}

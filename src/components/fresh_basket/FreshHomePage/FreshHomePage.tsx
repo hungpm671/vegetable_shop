@@ -14,7 +14,7 @@ export default function FreshHomePage() {
       <Flex className="mx-auto max-w-7xl" flexDir={"column"}>
         <FreshIntro />
         <FreshProductSuggestions />
-        <ProductSale />
+        <ProductSale title="Sản phẩm đang khuyến mãi" />
       </Flex>
       <FreshIntro_2 />
       <FreshNews />
