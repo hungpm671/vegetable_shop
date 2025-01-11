@@ -1,5 +1,5 @@
 import { Flex } from "@chakra-ui/react";
-import EmblaCarousel from "@/components/fresh_basket/FreshCarouselBanner/embla_carousel/EmblaCarousel";
+import EmblaCarousel from "@/components/fresh_basket-home/FreshCarouselBanner/embla_carousel/EmblaCarousel";
 import { EmblaOptionsType } from "embla-carousel";
 
 export default function FreshCarousel() {

@@ -1,0 +1,7 @@
+.form_controller {
+  display: none !important;
+}
+
+.form_controller.active {
+  display: flex !important;
+}

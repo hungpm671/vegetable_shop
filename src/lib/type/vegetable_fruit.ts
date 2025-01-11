@@ -10,7 +10,7 @@ export interface VegetableFruit {
   origin: string;
   image: string;
   discount: number;
-  " createdAt": CreatedAt;
+  createdAt: CreatedAt;
 }
 
 export interface CreatedAt {

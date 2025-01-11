@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/react";
-import FreshHomePage from "@/components/fresh_basket/FreshHomePage/FreshHomePage";
+import FreshHomePage from "@/components/fresh_basket-home/FreshHomePage/FreshHomePage";
 
 export default function Home() {
   return (

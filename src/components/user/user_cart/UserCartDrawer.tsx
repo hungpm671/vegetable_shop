@@ -15,8 +15,10 @@ import {
 } from "@/components/ui/drawer";
 import { useState } from "react";
 import { TiShoppingCart } from "react-icons/ti";
-import ProductCartItem from "./ProductCartItem";
 import TotalCart from "../../../../utils/TotalCart";
+
+import { Users } from "@/lib/type/users";
+import ProductCartItem from "@/components/fresh_basket-home/FreshProductCart/ProductCartItem";
 
 const userShoppingCart = [
   {
@@ -156,7 +158,13 @@ const userShoppingCart = [
   },
 ];
 
-const FreshProductDrawer = () => {
+const UserCartDrawer = ({
+  data,
+  userId,
+}: {
+  data: Users[];
+  userId: string;
+}) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -213,4 +221,4 @@ const FreshProductDrawer = () => {
   );
 };
 
-export default FreshProductDrawer;
+export default UserCartDrawer;

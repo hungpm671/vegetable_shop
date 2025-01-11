@@ -24,7 +24,7 @@ import { IoMdHome } from "react-icons/io";
 import { MdStore } from "react-icons/md";
 import { EmptyState } from "@/components/ui/empty-state";
 import { FaHeart, FaSpinner } from "react-icons/fa6";
-import ProductSale from "@/components/fresh_basket/FreshProductSale/ProductSale";
+import ProductSale from "@/components/fresh_basket-home/FreshProductSale/ProductSale";
 import { Textarea } from "@chakra-ui/react";
 
 import { Card, HStack, Stack } from "@chakra-ui/react";

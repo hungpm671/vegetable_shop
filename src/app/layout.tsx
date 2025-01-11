@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Provider } from "@/components/ui/provider";
-import FreshNavbar from "@/components/fresh_basket/FreshNavbar/FreshNavbar";
-import FreshFooter from "@/components/fresh_basket/FreshFooter/FreshFooter";
+import FreshNavbar from "@/components/fresh_basket-home/FreshNavbar/FreshNavbar";
+import FreshFooter from "@/components/fresh_basket-home/FreshFooter/FreshFooter";
 import TanstackProvider from "@/components/tanstack_provider/TanstackProvider";
 
 const geistSans = localFont({
