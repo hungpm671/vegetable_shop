@@ -6,8 +6,13 @@ import { MdOutlineComment } from "react-icons/md";
 import Link from "next/link";
 import { VegetableFruit } from "@/lib/type/vegetable_fruit";
 import CalculateSalePrice from "../../../../utils/CalculateSalePrice";
+import { CalculateWeightPrice } from "../../../../utils/CalculateWeightPrice";
 
 export const ProductItem = ({ value }: { value: VegetableFruit }) => {
+  const handleLink = () => {
+    window.location.href = `/fresh-products/${value._id}`;
+  };
+
   return (
     <GridItem>
       <Tooltip
@@ -42,19 +47,32 @@ export const ProductItem = ({ value }: { value: VegetableFruit }) => {
               {value.name}
             </Card.Title>
             <Flex alignItems={"center"} gap={3}>
-              <Text fontSize={14} color={"red.500"} fontWeight={600}>
-                {Intl.NumberFormat("vi-VN").format(
-                  CalculateSalePrice(value.price_per_kg, value.discount)
-                )}
-                ₫/kg
-              </Text>
-
-              {value.discount !== 0 && (
-                <Text as={"s"} fontSize={12} color={"gray.400"}>
+              {value.unit.length > 1 ? (
+                <Text fontSize={14} color={"red.500"} fontWeight={600}>
+                  ₫
                   {Intl.NumberFormat("vi-VN").format(
-                    Number(value.price_per_kg)
+                    CalculateSalePrice(
+                      CalculateWeightPrice(value.price_per_kg, value.unit[0]),
+                      value.discount
+                    )
+                  )}{" "}
+                  -{" "}
+                  {Intl.NumberFormat("vi-VN").format(
+                    CalculateSalePrice(
+                      CalculateWeightPrice(
+                        value.price_per_kg,
+                        value.unit[value.unit.length - 1]
+                      ),
+                      value.discount
+                    )
                   )}
-                  ₫/kg
+                </Text>
+              ) : (
+                <Text fontSize={14} color={"red.500"} fontWeight={600}>
+                  ₫
+                  {Intl.NumberFormat("vi-VN").format(
+                    CalculateSalePrice(value.price_per_kg, value.discount)
+                  )}
                 </Text>
               )}
             </Flex>
@@ -86,6 +104,7 @@ export const ProductItem = ({ value }: { value: VegetableFruit }) => {
             <Button
               variant="ghost"
               className=" rounded-full hover:bg-green-600 hover:text-white"
+              onClick={handleLink}
             >
               <TiShoppingCart aria-hidden="true" className="size-6" />
             </Button>

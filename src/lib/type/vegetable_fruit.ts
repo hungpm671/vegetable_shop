@@ -5,11 +5,13 @@ export interface VegetableFruit {
   name: string;
   type: string;
   description: string;
-  price_per_kg: string;
+  price_per_kg: number;
   state: boolean;
   origin: string;
   image: string;
   discount: number;
+  unit: number[];
+  comments: string[];
   createdAt: CreatedAt;
 }
 

@@ -6,7 +6,7 @@ import { BiLaugh } from "react-icons/bi";
 import { PasswordInput } from "@/components/ui/password-input";
 import { useForm } from "react-hook-form";
 import { IoArrowForwardCircle } from "react-icons/io5";
-import { getUserInfo } from "@/_action/userAction";
+import { checkUserInfo } from "@/_action/userAction";
 import { Tabs } from "@chakra-ui/react";
 
 interface FormValues {
@@ -22,7 +22,7 @@ export default function FormLogin() {
   } = useForm<FormValues>();
 
   const onSubmit = handleSubmit(async (data) => {
-    const user = await getUserInfo(data.username);
+    const user = await checkUserInfo(data.username);
     if (user[0]) {
       await sessionStorage.setItem("userId", user[0]._id);
       window.location.href = `/`;

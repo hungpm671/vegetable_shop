@@ -189,6 +189,9 @@ interface FreshBasketState {
 
   filterConditions: VegetableFruit[];
   setFilterConditions: (data: VegetableFruit[]) => void;
+
+  initialUnit: number;
+  setInitialUnit: (unit: number) => void;
 }
 
 export const useFreshBasketStore = create<FreshBasketState>()((set) => ({
@@ -297,6 +300,12 @@ export const useFreshBasketStore = create<FreshBasketState>()((set) => ({
             )
           : true
       ),
+    })),
+
+  initialUnit: 0,
+  setInitialUnit: (unit) =>
+    set(() => ({
+      initialUnit: unit,
     })),
 }));
 

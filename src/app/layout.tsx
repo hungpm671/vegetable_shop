@@ -5,6 +5,7 @@ import { Provider } from "@/components/ui/provider";
 import FreshNavbar from "@/components/fresh_basket-home/FreshNavbar/FreshNavbar";
 import FreshFooter from "@/components/fresh_basket-home/FreshFooter/FreshFooter";
 import TanstackProvider from "@/components/tanstack_provider/TanstackProvider";
+import { Toaster } from "@/components/ui/toaster";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -37,6 +38,7 @@ export default function RootLayout({
             <FreshNavbar />
             {children}
             <FreshFooter />
+            <Toaster />
           </Provider>
         </TanstackProvider>
       </body>

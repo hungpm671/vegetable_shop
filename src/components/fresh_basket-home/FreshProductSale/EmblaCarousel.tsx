@@ -42,10 +42,6 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
         <Flex
           alignItems={"center"}
           justifyContent={"space-between"}
-          position={"absolute"}
-          top={0}
-          right={0}
-          left={0}
           className="embla__buttons-product_sale"
         >
           <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />

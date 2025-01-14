@@ -11,11 +11,13 @@ import WaitingLoading from "../../../../utils/WaitingLoading";
 
 export default function ProductSale({ title = "Sản phẩm đang khuyến mãi" }) {
   const { data, isLoading } = useQuery({
-    queryKey: ["courses"],
+    queryKey: ["vegetable"],
     queryFn: async () => await getVegetableFruit(),
   });
 
-  const OPTIONS: EmblaOptionsType = { align: "start" };
+  const OPTIONS: EmblaOptionsType = {
+    align: "start",
+  };
 
   if (isLoading) {
     return <WaitingLoading />;

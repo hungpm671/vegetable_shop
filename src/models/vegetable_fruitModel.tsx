@@ -10,6 +10,8 @@ const vegetableFruitSchema = new Schema(
     origin: { type: String },
     image: { type: String },
     discount: { type: Number, require: true },
+    unit: [{ type: String }],
+    comments: [{ type: String }],
   },
   { timestamps: true }
 );

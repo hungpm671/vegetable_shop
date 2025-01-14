@@ -13,7 +13,7 @@ export default function UserCart({
 }) {
   return (
     <Flex alignItems={"center"} gap={3}>
-      <UserCartDrawer data={data} userId={userId} />
+      <UserCartDrawer userId={userId} />
       <UserForm data={data} />
     </Flex>
   );

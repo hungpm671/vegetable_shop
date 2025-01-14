@@ -4,6 +4,9 @@ import React from "react";
 import CalculateSalePrice from "../../../../utils/CalculateSalePrice";
 
 export default function ProductSaleItem({ value }: { value: VegetableFruit }) {
+  const handleLink = () => {
+    window.location.href = `/fresh-products/${value._id}`;
+  };
   return (
     <div className="embla__slide-product-sale">
       <div className="embla__slide__number-product-sale gap-3">
@@ -52,6 +55,8 @@ export default function ProductSaleItem({ value }: { value: VegetableFruit }) {
               bgColor={"green.500"}
               color={"white"}
               paddingInline={"10px"}
+              cursor={"pointer"}
+              onClick={handleLink}
             >
               Mua ngay
             </Button>
