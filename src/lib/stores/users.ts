@@ -10,9 +10,13 @@ interface UserState {
 
   updateCartUser: (cart: Cart) => void;
 
-  updateCartUserByQuantity: (id: string, quantity: number) => void;
+  updateCartUserByQuantity: (
+    id: string,
+    weight: number,
+    quantity: number
+  ) => void;
 
-  deleteCartUser: (id: string) => void;
+  deleteCartUser: (id: string, weight: number) => void;
 }
 
 export const useUsersStore = create<UserState>()((set) => ({
@@ -24,9 +28,6 @@ export const useUsersStore = create<UserState>()((set) => ({
 
   updateCartUser: (cart) =>
     set((state) => {
-      console.log("Current cartUser:", state.cartUser);
-      console.log("New cart item:", cart);
-
       const index = state.cartUser.findIndex(
         (item) =>
           item.product_id.toString() === cart.product_id.toString() &&
@@ -45,19 +46,27 @@ export const useUsersStore = create<UserState>()((set) => ({
       }
     }),
 
-  updateCartUserByQuantity: (id, quantity) =>
+  updateCartUserByQuantity: (id, weight, quantity) =>
     set((state) => {
       const updatedCart = state.cartUser.map((item) =>
-        item.product_id === id ? { ...item, quantity } : item
+        item.product_id.toString() === id.toString() &&
+        Number(item.weight) === Number(weight)
+          ? { ...item, quantity }
+          : item
       );
       return { cartUser: updatedCart };
     }),
 
-  deleteCartUser: (id) =>
+  deleteCartUser: (id, weight) =>
     set((state) => {
       const updatedCart = state.cartUser.filter(
-        (item) => item.product_id.toString() !== id
+        (item) =>
+          !(
+            item.product_id.toString() === id.toString() &&
+            Number(item.weight) === Number(weight)
+          )
       );
+
       return { cartUser: updatedCart };
     }),
 }));

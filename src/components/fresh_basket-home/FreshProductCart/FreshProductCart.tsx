@@ -10,7 +10,8 @@ import { useUsersStore } from "@/lib/stores/users";
 
 export default function FreshProductCart() {
   const { setCartUser } = useUsersStore((state) => state);
-  const userId = sessionStorage.getItem("userId");
+  const userId =
+    typeof window !== "undefined" ? sessionStorage.getItem("userId") : null;
 
   const { data, isLoading, isSuccess } = useQuery({
     queryKey: ["userId", userId],

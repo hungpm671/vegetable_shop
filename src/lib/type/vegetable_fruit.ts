@@ -1,7 +1,7 @@
-import { ObjectId } from "mongoose";
+import mongoose, { ObjectId } from "mongoose";
 
 export interface VegetableFruit {
-  _id: ID;
+  _id: mongoose.Types.ObjectId;
   name: string;
   type: string;
   description: string;
@@ -11,7 +11,8 @@ export interface VegetableFruit {
   image: string;
   discount: number;
   unit: number[];
-  comments: string[];
+  comments: Comments[];
+  wishlist: Wishlist[];
   createdAt: CreatedAt;
 }
 
@@ -21,4 +22,21 @@ export interface CreatedAt {
 
 export interface ID {
   $oid: ObjectId;
+}
+
+export interface Comments {
+  _id: mongoose.Types.ObjectId;
+  author: string;
+  content: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface Wishlist {
+  _id: mongoose.Types.ObjectId;
+  user_id: string;
+  like: boolean;
+  dislike: boolean;
+  createdAt: Date;
+  updatedAt: Date;
 }

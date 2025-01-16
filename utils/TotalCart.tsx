@@ -1,13 +1,13 @@
 import React from "react";
 import CalculateSalePrice from "./CalculateSalePrice";
 import { Box } from "@chakra-ui/react";
-import { Cart, Users } from "@/lib/type/users";
+import { useUsersStore } from "@/lib/stores/users";
 
-export default function TotalCart({ value }: { value: Cart[] }) {
-  const total = value.reduce(
+export default function TotalCart() {
+  const { cartUser } = useUsersStore((state) => state);
+  const total = cartUser.reduce(
     (acc, curr) =>
-      acc +
-      CalculateSalePrice(curr.price.toString(), curr.discount) * curr.quantity,
+      acc + CalculateSalePrice(curr.price, curr.discount) * curr.quantity,
     0
   );
 

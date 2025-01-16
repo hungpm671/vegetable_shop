@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { VegetableFruit } from "../type/vegetable_fruit";
+import { Comments, VegetableFruit, Wishlist } from "../type/vegetable_fruit";
 
 const navigation = [
   { name: "Trang chủ", href: "/", current: true },
@@ -192,8 +192,45 @@ interface FreshBasketState {
 
   initialUnit: number;
   setInitialUnit: (unit: number) => void;
+
+  // comment product
+  initialComments: Comments[];
+  setComments: (comments: Comments[]) => void;
+
+  updateComment: (comment: Comments) => void;
+
+  // wishlist product
+  initialWishlist: Wishlist[];
+  setWishlist: (wishlist: Wishlist[]) => void;
+
+  updateWishlist: (item: Wishlist) => void;
 }
 
+const filterPriceFunct = (filterPrice: string, fruit: VegetableFruit) => {
+  if (filterPrice === "under-10000") {
+    return Number(fruit.price_per_kg) < 10000;
+  }
+
+  if (filterPrice === "from-10000-to-20000") {
+    return (
+      Number(fruit.price_per_kg) >= 10000 && Number(fruit.price_per_kg) <= 20000
+    );
+  }
+
+  if (filterPrice === "from-20000-to-30000") {
+    return (
+      Number(fruit.price_per_kg) >= 20000 && Number(fruit.price_per_kg) <= 30000
+    );
+  }
+
+  if (filterPrice === "above-30000") {
+    return Number(fruit.price_per_kg) > 30000;
+  }
+
+  return true;
+};
+
+/////////////////////////////////////////////////// zustand
 export const useFreshBasketStore = create<FreshBasketState>()((set) => ({
   navigation: navigation,
   setNavigation: (href: string) =>
@@ -307,28 +344,55 @@ export const useFreshBasketStore = create<FreshBasketState>()((set) => ({
     set(() => ({
       initialUnit: unit,
     })),
+
+  // comments for product
+  initialComments: [],
+  setComments: (comments) =>
+    set(() => ({
+      initialComments: comments,
+    })),
+
+  updateComment: (comment) =>
+    set((state) => {
+      const index = state.initialComments.findIndex(
+        (index) => index.author.toString() == comment.author.toString()
+      );
+
+      if (index !== -1) {
+        const updateComments = [...state.initialComments];
+        updateComments[index] = {
+          ...updateComments[index],
+          content: comment.content,
+          updatedAt: new Date(),
+        };
+
+        return { initialComments: updateComments };
+      } else {
+        return { initialComments: [...state.initialComments, comment] };
+      }
+    }),
+
+  // wishlist product
+  initialWishlist: [],
+  setWishlist: (wishlist) =>
+    set(() => ({
+      initialWishlist: wishlist,
+    })),
+
+  updateWishlist: (wishlist) =>
+    set((state) => {
+      const index = state.initialWishlist.findIndex(
+        (item) => item.user_id.toString() === wishlist.user_id.toString()
+      );
+
+      if (index !== -1) {
+        return {
+          initialWishlist: state.initialWishlist.filter(
+            (item) => item.user_id.toString() !== wishlist.user_id.toString()
+          ),
+        };
+      } else {
+        return { initialWishlist: [...state.initialWishlist, wishlist] };
+      }
+    }),
 }));
-
-const filterPriceFunct = (filterPrice: string, fruit: VegetableFruit) => {
-  if (filterPrice === "under-10000") {
-    return Number(fruit.price_per_kg) < 10000;
-  }
-
-  if (filterPrice === "from-10000-to-20000") {
-    return (
-      Number(fruit.price_per_kg) >= 10000 && Number(fruit.price_per_kg) <= 20000
-    );
-  }
-
-  if (filterPrice === "from-20000-to-30000") {
-    return (
-      Number(fruit.price_per_kg) >= 20000 && Number(fruit.price_per_kg) <= 30000
-    );
-  }
-
-  if (filterPrice === "above-30000") {
-    return Number(fruit.price_per_kg) > 30000;
-  }
-
-  return true;
-};

@@ -19,7 +19,7 @@ export default function UserForm({ data }: { data: Users[] }) {
     <Flex position={"relative"}>
       <Button className="flex rounded-full" onClick={handleClick}>
         <Avatar
-          name={data[0]?.full_name}
+          name={data[0]?.username}
           colorPalette="pink"
           src={data[0]?.avatar_url}
         />

@@ -68,7 +68,7 @@ const UserCartDrawer = ({ userId }: { userId: string }) => {
               color={"white"}
               fontWeight={700}
             >
-              <TotalCart value={cartUser} />
+              <TotalCart />
             </Button>
           )}
           <DrawerActionTrigger asChild>

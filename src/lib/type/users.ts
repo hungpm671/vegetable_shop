@@ -1,7 +1,7 @@
-import { ObjectId } from "mongoose";
+import mongoose from "mongoose";
 
 export interface Users {
-  _id: ObjectId;
+  _id: mongoose.Types.ObjectId;
   username: string;
   email: string;
   password: string;
@@ -17,7 +17,7 @@ export interface Users {
 }
 
 export interface Cart {
-  _id: ObjectId;
+  _id: mongoose.Types.ObjectId;
   product_id: string;
   quantity: number;
   price: number;

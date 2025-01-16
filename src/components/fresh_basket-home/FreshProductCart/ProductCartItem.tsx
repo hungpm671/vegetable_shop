@@ -17,56 +17,8 @@ export default function ProductCartItem({ value }: { value: Cart }) {
     (state) => state
   );
 
-  const handleDeleteCartItem = async (id: string, productName: string) => {
-    const userId = sessionStorage.getItem("userId");
-    if (userId) {
-      const result = await removeCartUser(userId, id, productName);
-
-      if (result.errorMsg) {
-        toaster.create({
-          title: "Warning",
-          type: "warning",
-          description: `"Error adding product to cart:" ${result.errorMsg}`,
-        });
-      } else {
-        deleteCartUser(id);
-        toaster.error({
-          title: "Sản phẩm đã được xóa khỏi giỏ hàng.",
-          description: result.message,
-        });
-      }
-    }
-  };
-
-  const handleUpdateQuantity = async (
-    e: React.KeyboardEvent<HTMLInputElement>,
-    productId: string
-  ) => {
-    if (e.key === "Enter") {
-      const userId = sessionStorage.getItem("userId");
-      const newQuantity = parseInt((e.target as HTMLInputElement).value);
-      if (userId && newQuantity > 0) {
-        const result = await updateCartByQuantity(
-          userId,
-          productId,
-          newQuantity
-        );
-        if (result.errorMsg) {
-          toaster.create({
-            title: "Warning",
-            type: "warning",
-            description: `"Error update product to cart:" ${result.errorMsg}`,
-          });
-        } else {
-          updateCartUserByQuantity(productId, newQuantity);
-          toaster.success({
-            title: "Giỏ hàng đã được thay đổi theo yêu cầu của bạn.",
-            description: result.message,
-          });
-        }
-      }
-    }
-  };
+  const userId =
+    typeof window !== "undefined" ? sessionStorage.getItem("userId") : null;
 
   const { data, isLoading } = useQuery({
     queryKey: ["vegetable", value.product_id],
@@ -84,6 +36,61 @@ export default function ProductCartItem({ value }: { value: Cart }) {
         </Stack>
       </HStack>
     );
+
+  const handleDeleteCartItem = async (
+    id: string,
+    productName: string,
+    weight: number
+  ) => {
+    if (userId) {
+      const result = await removeCartUser(userId, id, productName, weight);
+
+      if (result.errorMsg) {
+        toaster.create({
+          title: "Warning",
+          type: "warning",
+          description: `"Error adding product to cart:" ${result.errorMsg}`,
+        });
+      } else {
+        deleteCartUser(id, weight);
+        toaster.error({
+          title: "Sản phẩm đã được xóa khỏi giỏ hàng.",
+          description: result.message,
+        });
+      }
+    }
+  };
+
+  const handleUpdateQuantity = async (
+    e: React.KeyboardEvent<HTMLInputElement>,
+    productId: string,
+    weight: number
+  ) => {
+    if (e.key === "Enter") {
+      const newQuantity = parseInt((e.target as HTMLInputElement).value);
+      if (userId && newQuantity > 0) {
+        const result = await updateCartByQuantity(
+          userId,
+          productId,
+          weight,
+          newQuantity
+        );
+        if (result.errorMsg) {
+          toaster.create({
+            title: "Warning",
+            type: "warning",
+            description: `"Error update product to cart:" ${result.errorMsg}`,
+          });
+        } else {
+          updateCartUserByQuantity(productId, weight, newQuantity);
+          toaster.success({
+            title: "Giỏ hàng đã được thay đổi theo yêu cầu của bạn.",
+            description: result.message,
+          });
+        }
+      }
+    }
+  };
 
   return (
     <Flex
@@ -112,7 +119,7 @@ export default function ProductCartItem({ value }: { value: Cart }) {
             {data[0]?.name}
           </Heading>
 
-          <select
+          {/* <select
             name="unit_product"
             id="unit_product"
             className="bg-gray-100"
@@ -123,7 +130,8 @@ export default function ProductCartItem({ value }: { value: Cart }) {
                 {item >= 1000 ? `${item / 1000}kg` : `${item}g`}
               </option>
             ))}
-          </select>
+          </select> */}
+
           <Text fontWeight={600} fontSize={12}>
             Phân loại:{" "}
             {data[0]?.type === "fruit"
@@ -133,21 +141,34 @@ export default function ProductCartItem({ value }: { value: Cart }) {
                 : "Thực phẩm khô"}
           </Text>
           <Flex alignItems={"center"} justifyContent={"space-between"} gap={4}>
-            <Text color={"red.400"}>
-              {Intl.NumberFormat("vi-VN").format(
-                CalculateSalePrice(
-                  CalculateWeightPrice(data[0]?.price_per_kg, value.weight),
-                  value.discount
-                )
+            <Flex alignItems={"center"}>
+              <Text color={"red.400"}>
+                {Intl.NumberFormat("vi-VN").format(
+                  CalculateSalePrice(
+                    CalculateWeightPrice(data[0]?.price_per_kg, value.weight),
+                    value.discount
+                  )
+                )}
+                ₫
+              </Text>
+
+              {data[0].unit.length > 0 && (
+                <Text color={"gray.400"} fontSize={12}>
+                  /
+                  {value.weight >= 1000
+                    ? `${value.weight / 1000}kg`
+                    : `${value.weight}g`}
+                </Text>
               )}
-              ₫
-            </Text>
+            </Flex>
             <Flex>
               <input
                 type="number"
                 defaultValue={value.quantity}
                 className="border bg-white w-[50px]"
-                onKeyDown={(e) => handleUpdateQuantity(e, value.product_id)}
+                onKeyDown={(e) =>
+                  handleUpdateQuantity(e, value.product_id, value.weight)
+                }
               />
             </Flex>
           </Flex>
@@ -158,7 +179,11 @@ export default function ProductCartItem({ value }: { value: Cart }) {
         bgColor={"red.600"}
         h={"100%"}
         onClick={() =>
-          handleDeleteCartItem(value.product_id.toString(), data[0]?.name)
+          handleDeleteCartItem(
+            value.product_id.toString(),
+            data[0]?.name,
+            value.weight
+          )
         }
       >
         <MdDeleteForever color="white" />

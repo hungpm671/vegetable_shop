@@ -89,7 +89,7 @@ export const ProductItem = ({ value }: { value: VegetableFruit }) => {
                 cursor={"pointer"}
                 className="hover:text-red-600"
               >
-                <FaHeart className="size-3" /> 1,999
+                <FaHeart className="size-3" /> {value.wishlist.length}
               </Flex>
 
               <Flex
@@ -98,7 +98,7 @@ export const ProductItem = ({ value }: { value: VegetableFruit }) => {
                 cursor={"pointer"}
                 className="hover:text-red-600"
               >
-                <MdOutlineComment className="size-3" /> 3
+                <MdOutlineComment className="size-3" /> {value.comments.length}
               </Flex>
             </Flex>
             <Button

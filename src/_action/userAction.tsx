@@ -74,8 +74,7 @@ export async function addToCart(
       {
         $inc: { "carts.$.quantity": newCartItem.quantity },
         $set: { "carts.$.updateAt": new Date() },
-      },
-      { upsert: true }
+      }
     );
 
     if (result.matchedCount === 0) {
@@ -100,6 +99,7 @@ export async function addToCart(
 export async function updateCartByQuantity(
   userId: string,
   productId: string,
+  weight: number,
   quantity: number
 ) {
   try {
@@ -109,6 +109,7 @@ export async function updateCartByQuantity(
       {
         _id: userId,
         "carts.product_id": new mongoose.Types.ObjectId(productId),
+        "carts.weight": weight,
       },
       {
         $set: {
@@ -137,7 +138,8 @@ export async function updateCartByQuantity(
 export async function removeCartUser(
   userId: string,
   productId: string,
-  productName: string
+  productName: string,
+  weight: number
 ) {
   try {
     await connectToDB();
@@ -148,7 +150,10 @@ export async function removeCartUser(
       },
       {
         $pull: {
-          carts: { product_id: new mongoose.Types.ObjectId(productId) },
+          carts: {
+            product_id: new mongoose.Types.ObjectId(productId),
+            weight: weight,
+          },
         },
       }
     );
