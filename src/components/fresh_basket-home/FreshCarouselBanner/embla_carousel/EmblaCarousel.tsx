@@ -129,16 +129,18 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                   <Flex
                     flexDir={"column"}
                     alignItems={"center"}
-                    gap={10}
+                    gap={{ base: 5, sm: 10 }}
                     position={"absolute"}
                     top={"30%"}
                     left={"50%"}
                     translate={"-50%"}
                     color={"#ffffff"}
+                    w={"full"}
+                    paddingInline={{ base: 5, md: 10, lg: "60px", xl: "100px" }}
                   >
                     <Heading
                       as={"h1"}
-                      fontSize={45}
+                      fontSize={{ base: 24, md: 36, lg: 45 }}
                       textAlign={"center"}
                       lineHeight={1.2}
                       fontWeight={600}

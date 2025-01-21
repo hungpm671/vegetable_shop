@@ -5,7 +5,12 @@ import React from "react";
 
 export default function FreshProducts() {
   return (
-    <Box className="mx-auto max-w-7xl" mt={"64px"} mb={50}>
+    <Box
+      className="max-w-7xl"
+      mt={"64px"}
+      mb={50}
+      marginInline={{ base: 5, md: 10, xl: "auto" }}
+    >
       <FreshBreadcumb />
       <ProductsMain />
     </Box>

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { EmblaOptionsType } from "embla-carousel";
 import useEmblaCarousel from "embla-carousel-react";
 import { Thumb } from "./EmblaCarouselThumbsButton";
-import { Grid, GridItem, Heading, Image, Text } from "@chakra-ui/react";
+import { Box, Flex, Grid, GridItem, Image, Text } from "@chakra-ui/react";
 import { FreshNews } from "@/lib/stores/fresh-basket";
 
 type PropType = {
@@ -41,41 +41,61 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
   }, [emblaMainApi, onSelect]);
 
   return (
-    <div className="embla embla-news">
-      <div className="embla__viewport embla-news__viewport" ref={emblaMainRef}>
-        <div className="embla__container embla-news__container">
+    <div className="embla_news max-w-7xl mb-[50px] mx-5 md:mx-10 xl:mx-auto">
+      <div className="embla__viewport_news" ref={emblaMainRef}>
+        <div className="embla__container_news">
           {slides.map((value, index) => (
-            <div className="embla__slide embla-news__slide" key={index}>
-              <div className="embla__slide__number embla-news__slide__number">
-                <Grid templateColumns="repeat(2, 1fr)" gap="3">
-                  <GridItem className="flex" justifyContent={"center"}>
-                    <Image src={value.image} objectFit={"cover"} alt="" />
-                  </GridItem>
-                  <GridItem
-                    className="flex"
-                    justifyContent={"center"}
-                    flexDir={"column"}
-                  >
-                    <Heading as={"h5"} fontSize={20} fontWeight={700}>
-                      {value.title}
-                    </Heading>
-                    <Text fontSize={12} fontWeight={400}>
-                      {value.description}
-                    </Text>
-                  </GridItem>
-                </Grid>
-              </div>
+            <div className="embla__slide_news" key={index}>
+              <Grid templateColumns={{ base: "1fr", md: "repeat(2, 1fr)" }}>
+                <GridItem>
+                  <Flex className="embla__slide__number_news relative">
+                    <Image
+                      src={value.image}
+                      alt={value.title}
+                      objectFit={"cover"}
+                    />
+
+                    <Box
+                      position={"absolute"}
+                      right={0}
+                      left={0}
+                      bottom={0}
+                      color={"white"}
+                      padding={"5px"}
+                      borderImage={"fill 0 linear-gradient(#0001, #000)"}
+                      flexDir={"column"}
+                      display={{ base: "flex", md: "none" }}
+                    >
+                      <Text fontSize={{ base: 12, sm: 16 }}>{value.title}</Text>
+                      <Text fontSize={{ base: 12, sm: 14 }} fontWeight={400}>
+                        {value.description}
+                      </Text>
+                    </Box>
+                  </Flex>
+                </GridItem>
+
+                <GridItem
+                  padding={5}
+                  display={{ base: "none", md: "flex" }}
+                  flexDir={"column"}
+                  justifyContent={"center"}
+                >
+                  <Text fontSize={{ base: 16, lg: 24 }} fontWeight={600}>
+                    {value.title}
+                  </Text>
+                  <Text fontSize={{ base: 14 }} fontWeight={400}>
+                    {value.description}
+                  </Text>
+                </GridItem>
+              </Grid>
             </div>
           ))}
         </div>
       </div>
 
-      <div className="embla-thumbs embla-news-thumbs">
-        <div
-          className="embla-thumbs__viewport embla-news-thumbs__viewport"
-          ref={emblaThumbsRef}
-        >
-          <div className="embla-thumbs__container embla-news-thumbs__container">
+      <div className="embla-thumbs_news">
+        <div className="embla-thumbs__viewport_news" ref={emblaThumbsRef}>
+          <div className="embla-thumbs__container_news">
             {slides.map((value, index) => (
               <Thumb
                 key={index}

@@ -27,21 +27,27 @@ export const ProductItem = ({ value }: { value: VegetableFruit }) => {
           className="border shadow-md"
         >
           <Link href={`/fresh-products/${value._id}`}>
-            <Flex padding={"10px"}>
+            <Flex
+              padding={{ base: "8px", sm: "10px", md: "15px", lg: "24px" }}
+              justifyContent={"center"}
+            >
               <Image
                 src={value.image}
                 alt={value.name}
                 objectFit={"cover"}
-                h={"200px"}
+                maxW={{ base: "100px", sm: "150px" }}
+                maxH={{ base: "100px", sm: "150px" }}
                 flex={1}
               />
             </Flex>
           </Link>
           <Card.Body
-            gap="2"
             flexDir={"row"}
-            alignItems={"center"}
-            justifyContent={"space-between"}
+            // alignItems={"center"}
+            // justifyContent={"space-between"}
+            flexDirection={"column"}
+            paddingInline={{ base: "8px", sm: "10px", md: "15px", lg: "24px" }}
+            paddingBlock={0}
           >
             <Card.Title textTransform={"capitalize"} fontWeight={700}>
               {value.name}
@@ -78,9 +84,9 @@ export const ProductItem = ({ value }: { value: VegetableFruit }) => {
             </Flex>
           </Card.Body>
           <Card.Footer
-            gap="2"
             alignItems={"center"}
             justifyContent={"space-between"}
+            padding={{ base: "8px", sm: "10px", md: "15px", lg: "24px" }}
           >
             <Flex fontSize={12} gap={2} color={"gray.500"}>
               <Flex

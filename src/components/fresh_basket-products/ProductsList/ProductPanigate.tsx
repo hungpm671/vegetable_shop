@@ -9,7 +9,10 @@ import "./style.css";
 
 function Items({ currentItems }: { currentItems: VegetableFruit[] }) {
   return (
-    <Grid templateColumns={"repeat(3, 1fr)"} gap={5}>
+    <Grid
+      templateColumns={{ base: "repeat(2, 1fr)", md: "repeat(3, 1fr)" }}
+      gap={3}
+    >
       {currentItems?.map((value: VegetableFruit, index: number) => (
         <ProductItem key={index} value={value} />
       ))}
@@ -47,7 +50,7 @@ export default function ProductPaginatedItems({
         pageCount={pageCount}
         previousLabel={<GrFormPrevious />}
         renderOnZeroPageCount={null}
-        className="flex gap-4 items-center justify-end pagination-feedback mt-3"
+        className="flex gap-4 items-center justify-center pagination-feedback mt-3"
         pageClassName="pagination-feedback-item flex rounded-full"
       />
     </>

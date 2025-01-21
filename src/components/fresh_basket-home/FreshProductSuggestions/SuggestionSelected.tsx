@@ -26,19 +26,19 @@ export default function SuggestionSelected() {
       gap={6}
     >
       <li
-        className="product_suggestion-title active-title"
+        className="product_suggestion-title active-title text-center"
         onClick={(e) => handleActiveTitle(e, "fruit")}
       >
         Hoa quả
       </li>
       <li
-        className="product_suggestion-title"
+        className="product_suggestion-title text-center"
         onClick={(e) => handleActiveTitle(e, "dry_food")}
       >
         Thực phẩm khô
       </li>
       <li
-        className="product_suggestion-title"
+        className="product_suggestion-title text-center"
         onClick={(e) => handleActiveTitle(e, "vegetable")}
       >
         Rau củ tươi

@@ -8,14 +8,19 @@ export default function FreshFooter() {
     <Box backgroundColor={"black"} color={"#fff"} id="contact" w={"full"}>
       <Grid
         className="mx-auto max-w-7xl"
-        templateColumns={"1fr 1fr 1fr"}
+        templateColumns={{ base: "1fr", lg: "repeat(3, 1fr)" }}
         gap={6}
         paddingBlock={50}
       >
-        <GridItem className="flex" flexDir={"column"} gap={4}>
+        <GridItem
+          className="flex"
+          flexDir={"column"}
+          gap={4}
+          alignItems={{ base: "center", lg: "flex-start" }}
+        >
           <Heading
             textTransform={"uppercase"}
-            fontSize={45}
+            fontSize={{ base: 30, lg: 40, xl: 45 }}
             mb={5}
             fontWeight={700}
           >
@@ -25,7 +30,12 @@ export default function FreshFooter() {
           <Text fontSize={12}>http://freshfood.com</Text>
         </GridItem>
 
-        <GridItem className="flex" flexDir={"column"} gap={3}>
+        <GridItem
+          className="flex"
+          flexDir={"column"}
+          gap={3}
+          alignItems={{ base: "center", lg: "flex-start" }}
+        >
           <Heading textTransform={"uppercase"} fontWeight={700} fontSize={18}>
             Liên kết
           </Heading>
@@ -46,7 +56,12 @@ export default function FreshFooter() {
           </Link>
         </GridItem>
 
-        <GridItem className="flex" flexDir={"column"} gap={3}>
+        <GridItem
+          className="flex"
+          flexDir={"column"}
+          gap={3}
+          alignItems={{ base: "center", lg: "flex-start" }}
+        >
           <Heading textTransform={"uppercase"} fontWeight={700} fontSize={18}>
             Liên hệ
           </Heading>

@@ -5,11 +5,11 @@ import ProductList from "../ProductsList/ProductList";
 
 export default function ProductsMain() {
   return (
-    <Grid templateColumns="repeat(4, 1fr)">
-      <GridItem colSpan={1}>
+    <Grid templateColumns={{ base: "1fr", lg: "repeat(4, 1fr)" }}>
+      <GridItem colSpan={1} display={{ base: "none", lg: "flex" }}>
         <ProductsSidebar />
       </GridItem>
-      <GridItem colSpan={3}>
+      <GridItem colSpan={{ base: 3 }}>
         <ProductList />
       </GridItem>
     </Grid>

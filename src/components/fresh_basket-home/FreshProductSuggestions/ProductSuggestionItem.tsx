@@ -46,22 +46,21 @@ export default function ProductSuggestionItem({
         h={20}
         objectFit={"cover"}
       />
-      <Flex flexDir={"column"}>
+      <Flex flexDir={"column"} gap={2}>
         <Text fontWeight={600} textTransform={"capitalize"}>
           {value.name}
         </Text>
-        <Flex alignItems={"center"} gap={3}>
-          <Text fontSize={12}>
+        <Flex gap={1} flexDir={{ base: "column" }}>
+          <Text fontSize={12} fontWeight={700} color={"red.500"}>
             {Intl.NumberFormat("vi-VN").format(
               CalculateSalePrice(value.price_per_kg, value.discount)
             )}
-            ₫/kg
+            ₫
           </Text>
 
           {value.discount !== 0 && (
             <Text as={"s"} fontSize={10} color={"gray.400"}>
-              {Intl.NumberFormat("vi-VN").format(Number(value.price_per_kg))}
-              ₫/kg
+              {Intl.NumberFormat("vi-VN").format(Number(value.price_per_kg))}₫
             </Text>
           )}
         </Flex>

@@ -31,8 +31,12 @@ export default function FormLogin() {
     }
   });
   return (
-    <Grid templateColumns="repeat(2, 1fr)" gap={2} h={"full"}>
-      <GridItem paddingInline={"15px"} paddingBlock={"50px 100px"}>
+    <Grid
+      templateColumns={{ base: "1fr", sm: "repeat(2, 1fr)" }}
+      gap={2}
+      h={"full"}
+    >
+      <GridItem paddingInline={"15px"} paddingBlock={"50px 50px"}>
         <Heading
           className="flex"
           alignItems={"center"}
@@ -95,6 +99,7 @@ export default function FormLogin() {
         bg={"linear-gradient(170deg, #34d399, #059669)"}
         color={"white"}
         paddingInline={"15px"}
+        display={{ base: "none", sm: "flex" }}
       >
         <Heading
           fontWeight={700}

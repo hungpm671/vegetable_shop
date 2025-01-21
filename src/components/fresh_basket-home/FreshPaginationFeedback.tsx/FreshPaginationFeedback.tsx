@@ -1,18 +1,22 @@
 "use client";
 
 import { useFreshBasketStore } from "@/lib/stores/fresh-basket";
-import { Flex, Heading } from "@chakra-ui/react";
+import { Flex, Heading, useBreakpointValue } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 import ReactPaginate from "react-paginate";
 import FreshFeedbacks from "./FreshFeedbacks/FreshFeedbacks";
 import "./style.css";
 
-export function FreshPaginationFeedback({
-  itemsPerPage,
-}: {
-  itemsPerPage: number;
-}) {
+export function FreshPaginationFeedback() {
+  const itemsPerPage =
+    useBreakpointValue({
+      base: 1,
+      md: 2,
+      lg: 3,
+      xl: 4,
+    }) || 1;
+
   const { feedback: items } = useFreshBasketStore((state) => state);
   const [itemOffset, setItemOffset] = useState(0);
 
@@ -26,7 +30,13 @@ export function FreshPaginationFeedback({
   };
 
   return (
-    <Flex flexDir={"column"} alignItems={"center"} marginBlock={50}>
+    <Flex
+      className="max-w-7xl"
+      flexDir={"column"}
+      alignItems={"center"}
+      marginBlock={50}
+      marginInline={{ base: 5, md: 10, xl: "auto" }}
+    >
       <Heading as={"h1"} fontSize={48} textAlign={"center"} fontWeight={700}>
         Feedback
       </Heading>
@@ -35,7 +45,7 @@ export function FreshPaginationFeedback({
         breakLabel="..."
         nextLabel={<GrFormNext />}
         onPageChange={handlePageClick}
-        pageRangeDisplayed={5}
+        pageRangeDisplayed={0}
         pageCount={pageCount}
         previousLabel={<GrFormPrevious />}
         renderOnZeroPageCount={null}

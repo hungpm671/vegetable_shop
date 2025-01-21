@@ -23,18 +23,25 @@ export default function FreshProductSuggestions() {
   }
 
   return (
-    <Flex flexDir={"column"} marginBlock={50}>
+    <Flex
+      className="max-w-7xl"
+      flexDir={"column"}
+      marginBlock={50}
+      marginInline={{ base: 5, md: 10, xl: "auto" }}
+    >
       <Heading
         as={"h1"}
-        fontSize={48}
+        fontSize={{ base: "35px", md: "40px", lg: "45px" }}
         textAlign={"center"}
         mb={30}
         fontWeight={700}
+        lineHeight={1.2}
       >
         Sản phẩm của chúng tôi
       </Heading>
 
       <Flex
+        flexDir={{ base: "column", md: "row" }}
         alignItems={"center"}
         justifyContent={"space-between"}
         borderBlockEnd={"1px solid #ccc"}
@@ -42,7 +49,7 @@ export default function FreshProductSuggestions() {
       >
         <Heading
           as={"h5"}
-          fontSize={16}
+          fontSize={{ base: "14px", lg: "16px" }}
           fontWeight={700}
           textTransform={"uppercase"}
         >
@@ -53,7 +60,12 @@ export default function FreshProductSuggestions() {
       </Flex>
 
       <Grid
-        templateColumns="repeat(4, 1fr)"
+        templateColumns={{
+          base: "1fr",
+          sm: "repeat(2, 1fr)",
+          md: "repeat(3, 1fr)",
+          lg: "repeat(5, 1fr)",
+        }}
         templateRows="repeat(2, 1fr)"
         gap={6}
       >

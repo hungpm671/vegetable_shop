@@ -7,7 +7,6 @@ import {
 } from "./EmblaCarouselArrowButtons";
 import useEmblaCarousel from "embla-carousel-react";
 import { VegetableFruit } from "@/lib/type/vegetable_fruit";
-import { Flex } from "@chakra-ui/react";
 import ProductSaleItem from "./ProductSaleItem";
 
 type PropType = {
@@ -27,9 +26,9 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
   } = usePrevNextButtons(emblaApi);
 
   return (
-    <section className="embla-product_sale">
-      <div className="embla__viewport-product-sale" ref={emblaRef}>
-        <div className="embla__container-product-sale">
+    <section className="embla_product-sale max-w-7xl relative mb-5 mx-5 md:mx-10 xl:mx-auto">
+      <div className="embla__viewport_product-sale" ref={emblaRef}>
+        <div className="embla__container_product-sale">
           {slides
             .filter((value) => value.discount > 0)
             ?.map((value, index) => (
@@ -38,15 +37,11 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
         </div>
       </div>
 
-      <div className="embla__controls-product_sale">
-        <Flex
-          alignItems={"center"}
-          justifyContent={"space-between"}
-          className="embla__buttons-product_sale"
-        >
+      <div className="embla__controls_product-sale">
+        <div className="embla__buttons_product-sale">
           <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
           <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
-        </Flex>
+        </div>
       </div>
     </section>
   );

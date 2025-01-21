@@ -5,7 +5,13 @@ import { FeedbackProp } from "@/lib/stores/fresh-basket";
 
 export const FreshFeedbackItem = ({ value }: { value: FeedbackProp }) => {
   return (
-    <Stack maxW="520px" gap="4">
+    <Stack
+      gap="4"
+      flex={1}
+      boxShadow={"sm"}
+      borderRadius={"md"}
+      padding={"10px 15px"}
+    >
       <Rating colorPalette="orange" readOnly size="xs" defaultValue={5} />
 
       <Text>{value.content}</Text>

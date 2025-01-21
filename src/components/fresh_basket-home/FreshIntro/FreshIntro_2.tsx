@@ -11,6 +11,7 @@ export default function FreshIntro_2() {
       backgroundRepeat="no-repeat"
       backgroundPosition="center"
       padding={20}
+      paddingInline={{ base: 5, md: 10, xl: 0 }}
     >
       <Flex flexDir={"column"} alignItems={"center"} gap={10}>
         <Box
@@ -23,7 +24,13 @@ export default function FreshIntro_2() {
             Hành Trình Khỏe Mạnh Bắt Đầu Từ Thực Phẩm Sạch
           </Heading>
         </Box>
-        <Box color={"white"} textAlign={"center"} fontSize={"lg"}>
+        <Box
+          className="max-w-7xl"
+          color={"white"}
+          textAlign={"center"}
+          fontSize={{ base: "sm", md: "md", lg: "lg" }}
+          marginInline={{ base: 5, md: 10, xl: "auto" }}
+        >
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla illum
           cumque sit doloremque quasi similique iusto, distinctio rem iste unde
           consectetur fugiat, debitis maiores mollitia eum? Dolore ad expedita
