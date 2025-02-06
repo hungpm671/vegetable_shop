@@ -10,7 +10,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { RiLogoutBoxRFill } from "react-icons/ri";
+import { RiLogoutBoxRLine } from "react-icons/ri";
 
 const UserFormLogout = () => {
   const handleClick = async () => {
@@ -27,18 +27,15 @@ const UserFormLogout = () => {
           paddingInline={2}
           className="hover:bg-gray-200"
         >
-          <RiLogoutBoxRFill /> Đăng xuất
+          <RiLogoutBoxRLine /> Đăng xuất
         </Button>
       </DialogTrigger>
       <DialogContent color={"white"}>
         <DialogHeader>
-          <DialogTitle fontSize={20}>Are you sure?</DialogTitle>
+          <DialogTitle fontSize={20}>Xác nhận đăng xuất</DialogTitle>
         </DialogHeader>
         <DialogBody>
-          <p>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our systems.
-          </p>
+          <p>Bạn có chắc chắn muốn đăng xuất khỏi hệ thống không?</p>
         </DialogBody>
         <DialogFooter>
           <DialogActionTrigger asChild>

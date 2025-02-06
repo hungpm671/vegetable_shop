@@ -6,7 +6,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useRef } from "react";
-import { RiLoginBoxFill } from "react-icons/ri";
+import { RiLoginBoxLine } from "react-icons/ri";
 import { Box, Tabs } from "@chakra-ui/react";
 import FormLogin from "./FormLogin";
 import FormRegister from "./FormRegister";
@@ -26,7 +26,7 @@ const UserFormLogin = () => {
           paddingInline={2}
           className="hover:bg-gray-200"
         >
-          <RiLoginBoxFill /> Đăng nhập
+          <RiLoginBoxLine /> Đăng nhập
         </Button>
       </DialogTrigger>
       <DialogContent bgColor={"white"} overflow={"hidden"}>

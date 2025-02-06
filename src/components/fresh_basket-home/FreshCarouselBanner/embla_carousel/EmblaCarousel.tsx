@@ -16,6 +16,7 @@ import { DotButton, useDotButton } from "./EmblaCarouselDotButton";
 import { Box, Flex, Heading, Image, Text } from "@chakra-ui/react";
 import Autoplay from "embla-carousel-autoplay";
 import "./embla.css";
+import { macondo } from "@/fonts/Macondo";
 
 const TWEEN_FACTOR_BASE = 0.2;
 
@@ -29,6 +30,7 @@ export type SlidesProp = {
   title: string;
   description: string;
 };
+
 const EmblaCarousel: React.FC<PropType> = (props) => {
   const { slides, options } = props;
   const [emblaRef, emblaApi] = useEmblaCarousel(options, [
@@ -140,6 +142,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                   >
                     <Heading
                       as={"h1"}
+                      className={macondo.className}
                       fontSize={{ base: 24, md: 36, lg: 45 }}
                       textAlign={"center"}
                       lineHeight={1.2}

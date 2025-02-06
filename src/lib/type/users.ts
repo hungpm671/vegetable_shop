@@ -14,6 +14,7 @@ export interface Users {
   createdAt: Date;
   updatedAt: Date;
   carts: Cart[];
+  orders: Order[];
 }
 
 export interface Cart {
@@ -25,4 +26,12 @@ export interface Cart {
   updateAt: Date;
   weight: number;
   discount: number;
+}
+
+export interface Order {
+  _id: mongoose.Types.ObjectId;
+  products: Cart[];
+  total_orders: number;
+  state: string;
+  createdAt: Date;
 }

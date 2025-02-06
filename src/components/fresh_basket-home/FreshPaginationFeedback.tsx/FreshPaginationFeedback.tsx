@@ -7,6 +7,7 @@ import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 import ReactPaginate from "react-paginate";
 import FreshFeedbacks from "./FreshFeedbacks/FreshFeedbacks";
 import "./style.css";
+import { macondo } from "@/fonts/Macondo";
 
 export function FreshPaginationFeedback() {
   const itemsPerPage =
@@ -34,10 +35,16 @@ export function FreshPaginationFeedback() {
       className="max-w-7xl"
       flexDir={"column"}
       alignItems={"center"}
-      marginBlock={50}
+      paddingBlock={"60px"}
       marginInline={{ base: 5, md: 10, xl: "auto" }}
     >
-      <Heading as={"h1"} fontSize={48} textAlign={"center"} fontWeight={700}>
+      <Heading
+        as={"h1"}
+        className={macondo.className}
+        fontSize={48}
+        textAlign={"center"}
+        fontWeight={700}
+      >
         Feedback
       </Heading>
       <FreshFeedbacks currentItems={currentItems} />

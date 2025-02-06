@@ -1,21 +1,17 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
 import { Provider } from "@/components/ui/provider";
 import FreshNavbar from "@/components/fresh_basket-home/FreshNavbar/FreshNavbar";
 import FreshFooter from "@/components/fresh_basket-home/FreshFooter/FreshFooter";
 import TanstackProvider from "@/components/tanstack_provider/TanstackProvider";
 import { Toaster } from "@/components/ui/toaster";
+import { Roboto } from "next/font/google";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+const roboto = Roboto({
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -30,9 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     <html suppressHydrationWarning lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${roboto.className} antialiased`}>
         <TanstackProvider>
           <Provider>
             <FreshNavbar />

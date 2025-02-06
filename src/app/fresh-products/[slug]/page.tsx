@@ -61,7 +61,7 @@ export default function FreshProductItem() {
     typeof window !== "undefined" ? sessionStorage.getItem("userId") : null; // sessionStorage user_id
 
   const { data, isLoading, isSuccess } = useQuery({
-    queryKey: ["courses", slug],
+    queryKey: ["vegetable", slug],
     queryFn: async () => {
       if (typeof slug === "string") {
         return await getVegetableFruitItem(slug);

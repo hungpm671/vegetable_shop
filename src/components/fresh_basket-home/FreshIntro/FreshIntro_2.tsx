@@ -1,3 +1,4 @@
+import { macondo } from "@/fonts/Macondo";
 import { Box, Button, Flex, Heading } from "@chakra-ui/react";
 import React from "react";
 
@@ -10,7 +11,7 @@ export default function FreshIntro_2() {
       backgroundSize={"cover"}
       backgroundRepeat="no-repeat"
       backgroundPosition="center"
-      padding={20}
+      paddingBlock={"60px"}
       paddingInline={{ base: 5, md: 10, xl: 0 }}
     >
       <Flex flexDir={"column"} alignItems={"center"} gap={10}>
@@ -20,7 +21,7 @@ export default function FreshIntro_2() {
           fontSize={"xl"}
           fontWeight={"bold"}
         >
-          <Heading as={"h2"} fontSize={28}>
+          <Heading as={"h2"} className={macondo.className} fontSize={28}>
             Hành Trình Khỏe Mạnh Bắt Đầu Từ Thực Phẩm Sạch
           </Heading>
         </Box>

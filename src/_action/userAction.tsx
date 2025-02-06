@@ -4,6 +4,8 @@ import connectToDB from "@/config/database";
 import UsersModel from "@/models/usersModel";
 import { CalculateWeightPrice } from "../../utils/CalculateWeightPrice";
 import mongoose from "mongoose";
+import CalculateSalePrice from "../../utils/CalculateSalePrice";
+import { Cart } from "@/lib/type/users";
 
 // checking information about user
 export async function checkUserInfo(params: string) {
@@ -164,6 +166,128 @@ export async function removeCartUser(
 
     return {
       message: `${productName.charAt(0).toUpperCase() + productName.slice(1).toLowerCase()} đã bị xóa khỏi giỏ hàng của bạn.`,
+    };
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      return { errorMsg: error.message };
+    }
+    return { errorMsg: "An unknown error occurred" };
+  }
+}
+
+// register user
+export async function registerUser(
+  username: string,
+  email: string,
+  password: string
+) {
+  try {
+    await connectToDB();
+
+    const userExist = await UsersModel.findOne({ email: email });
+
+    if (userExist) {
+      return { errorMsg: "Email đã tồn tại" };
+    }
+
+    const newUser = new UsersModel({
+      username: username,
+      email: email,
+      password: password,
+      full_name: "",
+      phone_number: "",
+      address: "",
+      avatar_url: "",
+      role: "user",
+      is_active: true,
+      carts: [],
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
+
+    await newUser.save();
+
+    return { message: "Đăng ký thành công" };
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      return { errorMsg: error.message };
+    }
+    return {
+      errorMsg:
+        "Đăng ký không thành công. Vui lòng kiểm tra thông tin và thử lại!",
+    };
+  }
+}
+
+// update information about the user
+export async function updateUserInfo(
+  userId: string,
+  full_name: string,
+  phone_number: string,
+  address: string
+) {
+  try {
+    await connectToDB();
+
+    const result = await UsersModel.updateOne(
+      {
+        _id: userId,
+      },
+      {
+        $set: {
+          full_name: full_name,
+          phone_number: phone_number,
+          address: address,
+          updatedAt: new Date(),
+        },
+      }
+    );
+
+    if (result.matchedCount === 0) {
+      return { errorMsg: "User not found" };
+    }
+
+    return { message: "Cập nhật thông tin thành công" };
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      return { errorMsg: error.message };
+    }
+    return { errorMsg: "An unknown error occurred" };
+  }
+}
+
+// order
+export async function orderByUser(userId: string, cartUser: Cart[]) {
+  try {
+    await connectToDB();
+
+    const newOrderItem = {
+      products: [...cartUser],
+      total_orders: Number(
+        cartUser.reduce(
+          (acc, curr) =>
+            acc + CalculateSalePrice(curr.price, curr.discount) * curr.quantity,
+          0
+        )
+      ),
+      state: "pending",
+      createdAt: new Date(),
+    };
+
+    console.log(userId, newOrderItem);
+
+    const result = await UsersModel.updateOne(
+      { _id: userId },
+      { $push: { orders: newOrderItem } }
+    );
+
+    if (result.matchedCount === 0) {
+      return { errorMsg: "User not found" };
+    }
+
+    return {
+      message:
+        "Đơn hàng của bạn đã được xác nhận. Chúng tôi sẽ sớm chuẩn bị và giao hàng cho bạn!",
     };
   } catch (error: unknown) {
     if (error instanceof Error) {

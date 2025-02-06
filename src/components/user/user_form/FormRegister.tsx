@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Grid, GridItem, Heading, Input, Stack, Text } from "@chakra-ui/react";
 import { Button } from "@/components/ui/button";
 import { Field } from "@/components/ui/field";
@@ -7,6 +7,8 @@ import { PasswordInput } from "@/components/ui/password-input";
 import { useForm } from "react-hook-form";
 import { IoArrowBackCircleSharp } from "react-icons/io5";
 import { Tabs } from "@chakra-ui/react";
+import { registerUser } from "@/_action/userAction";
+import { toaster } from "@/components/ui/toaster";
 
 interface FormValues {
   username: string;
@@ -15,6 +17,11 @@ interface FormValues {
   re_password: string;
 }
 export default function FormRegister() {
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [repassword, setRepassword] = useState("");
+
   const {
     register,
     handleSubmit,
@@ -22,7 +29,24 @@ export default function FormRegister() {
   } = useForm<FormValues>();
 
   const onSubmit = handleSubmit(async () => {
-    console.log("success");
+    if (password !== repassword) {
+      alert("Mật khẩu không trùng khớp!");
+      return;
+    }
+
+    const result = await registerUser(username, email, password);
+    if (result.errorMsg) {
+      toaster.error({
+        title: "Thông báo",
+        description: result.errorMsg,
+      });
+    } else {
+      toaster.success({
+        title: "Đăng ký thành công",
+        description: result.message,
+      });
+      window.location.href = `/`;
+    }
   });
 
   return (
@@ -101,6 +125,7 @@ export default function FormRegister() {
                       message: "Username must not contain special characters",
                     },
                   })}
+                  onChange={(e) => setUsername(e.target.value)}
                 />
               </Field>
 
@@ -117,6 +142,7 @@ export default function FormRegister() {
                       message: "Invalid email address",
                     },
                   })}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </Field>
 
@@ -138,6 +164,7 @@ export default function FormRegister() {
                         "Password must be at least 6 characters, include 1 uppercase letter, 1 number, and 1 special character",
                     },
                   })}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </Field>
 
@@ -159,6 +186,7 @@ export default function FormRegister() {
                         "Password must be at least 6 characters, include 1 uppercase letter, 1 number, and 1 special character",
                     },
                   })}
+                  onChange={(e) => setRepassword(e.target.value)}
                 />
               </Field>
 

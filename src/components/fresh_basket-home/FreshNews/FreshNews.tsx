@@ -6,6 +6,7 @@ import { EmblaOptionsType } from "embla-carousel";
 import "./embla.css";
 import { Heading } from "@chakra-ui/react";
 import { useFreshBasketStore } from "@/lib/stores/fresh-basket";
+import { macondo } from "@/fonts/Macondo";
 
 export default function FreshNews() {
   const { fresh_news } = useFreshBasketStore((state) => state);
@@ -16,10 +17,11 @@ export default function FreshNews() {
     <>
       <Heading
         as={"h1"}
+        className={macondo.className}
         fontSize={{ base: "35px", md: "40px", lg: "45px" }}
         textAlign={"center"}
         fontWeight={700}
-        marginBlock={"50px 30px"}
+        marginBlock={"60px 30px"}
       >
         Tin Tức
       </Heading>

@@ -8,6 +8,7 @@ import "./style.css";
 import { useQuery } from "@tanstack/react-query";
 import { getVegetableFruit } from "@/_action/vegetableAction";
 import WaitingLoading from "../../../../utils/WaitingLoading";
+import { roboto } from "@/fonts/Roboto";
 
 export default function ProductSale() {
   const { data, isLoading } = useQuery({
@@ -27,7 +28,7 @@ export default function ProductSale() {
     <>
       <Heading
         as={"h5"}
-        className="max-w-7xl"
+        className={`${roboto.className} max-w-7xl`}
         fontSize={16}
         fontWeight={700}
         textTransform={"uppercase"}

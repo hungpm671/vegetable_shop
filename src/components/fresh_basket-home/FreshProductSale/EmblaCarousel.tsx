@@ -26,7 +26,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
   } = usePrevNextButtons(emblaApi);
 
   return (
-    <section className="embla_product-sale max-w-7xl relative mb-5 mx-5 md:mx-10 xl:mx-auto">
+    <section className="embla_product-sale max-w-7xl relative mx-5 md:mx-10 xl:mx-auto mb-[60px]">
       <div className="embla__viewport_product-sale" ref={emblaRef}>
         <div className="embla__container_product-sale">
           {slides

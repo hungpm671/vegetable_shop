@@ -9,6 +9,8 @@ import { VegetableFruit } from "@/lib/type/vegetable_fruit";
 import ProductSuggestionItem from "./ProductSuggestionItem";
 import SuggestionSelected from "./SuggestionSelected";
 import WaitingLoading from "../../../../utils/WaitingLoading";
+import { macondo } from "@/fonts/Macondo";
+import { roboto } from "@/fonts/Roboto";
 
 export default function FreshProductSuggestions() {
   const { type } = useFreshBasketStore((state) => state);
@@ -26,11 +28,12 @@ export default function FreshProductSuggestions() {
     <Flex
       className="max-w-7xl"
       flexDir={"column"}
-      marginBlock={50}
+      paddingBlock={"60px"}
       marginInline={{ base: 5, md: 10, xl: "auto" }}
     >
       <Heading
         as={"h1"}
+        className={macondo.className}
         fontSize={{ base: "35px", md: "40px", lg: "45px" }}
         textAlign={"center"}
         mb={30}
@@ -49,6 +52,7 @@ export default function FreshProductSuggestions() {
       >
         <Heading
           as={"h5"}
+          className={roboto.className}
           fontSize={{ base: "14px", lg: "16px" }}
           fontWeight={700}
           textTransform={"uppercase"}

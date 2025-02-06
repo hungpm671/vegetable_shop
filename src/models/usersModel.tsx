@@ -10,6 +10,13 @@ const CartSchema = new Schema({
   updateAt: { type: Date, default: Date.now },
 });
 
+const OrderSchema = new Schema({
+  products: [CartSchema],
+  total_orders: { type: Number, required: true },
+  state: { type: String, required: true },
+  createdAt: { type: Date, default: Date.now },
+});
+
 const usersSchema = new Schema(
   {
     username: { type: String, require: true, maxLength: 255 },
@@ -22,6 +29,7 @@ const usersSchema = new Schema(
     role: { type: String, require: true, maxLength: 255 },
     is_active: { type: Boolean, require: true },
     carts: [CartSchema],
+    orders: [OrderSchema],
   },
   { timestamps: true }
 );

@@ -9,7 +9,8 @@ import { useRef } from "react";
 import { Box, Tabs } from "@chakra-ui/react";
 import FormLogin from "./FormLogin";
 import FormRegister from "./FormRegister";
-import { BiSolidRegistered } from "react-icons/bi";
+
+import { RiRegisteredLine } from "react-icons/ri";
 
 const UserFormRegister = () => {
   const ref = useRef<HTMLInputElement>(null);
@@ -26,7 +27,7 @@ const UserFormRegister = () => {
           paddingInline={2}
           className="hover:bg-gray-200"
         >
-          <BiSolidRegistered /> Đăng ký
+          <RiRegisteredLine /> Đăng ký
         </Button>
       </DialogTrigger>
       <DialogContent bgColor={"white"} overflow={"hidden"}>

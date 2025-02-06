@@ -20,13 +20,39 @@ import { EmptyState } from "@/components/ui/empty-state";
 import { LuShoppingCart } from "react-icons/lu";
 import ProductCartItem from "@/components/fresh_basket-home/FreshProductCart/ProductCartItem";
 import { useUsersStore } from "@/lib/stores/users";
+import { orderByUser } from "@/_action/userAction";
+import { toaster } from "@/components/ui/toaster";
 
 const UserCartDrawer = ({ userId }: { userId: string }) => {
-  const { cartUser } = useUsersStore((state) => state);
+  const { cartUser, setCartUser } = useUsersStore((state) => state);
 
   const [open, setOpen] = useState(false);
 
-  console.log(userId);
+  const handleOrder = async () => {
+    if (userId) {
+      const result = await orderByUser(userId, cartUser);
+
+      if (result.errorMsg) {
+        toaster.create({
+          title: "Thất bại",
+          type: "warning",
+          description: `"Error adding product to cart:" ${result.errorMsg}`,
+        });
+      } else {
+        setCartUser([]);
+        toaster.success({
+          title: "Đặt hàng thành công!",
+          description: result.message,
+        });
+      }
+    } else {
+      toaster.create({
+        title: "Warning",
+        type: "warning",
+        description: "User not logged in, please login to add product to cart.",
+      });
+    }
+  };
 
   return (
     <DrawerRoot open={open} onOpenChange={(e) => setOpen(e.open)} size="md">
@@ -60,6 +86,7 @@ const UserCartDrawer = ({ userId }: { userId: string }) => {
             <EmptyCart />
           )}
         </DrawerBody>
+
         <DrawerFooter>
           {cartUser.length > 0 && (
             <Button
@@ -67,6 +94,7 @@ const UserCartDrawer = ({ userId }: { userId: string }) => {
               paddingInline={"10px"}
               color={"white"}
               fontWeight={700}
+              onClick={handleOrder}
             >
               <TotalCart />
             </Button>

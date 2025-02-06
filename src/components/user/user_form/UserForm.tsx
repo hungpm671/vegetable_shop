@@ -6,6 +6,8 @@ import { Avatar } from "@/components/ui/avatar";
 import "./style.css";
 import UserFormLogout from "./UserFormLogout";
 import { Users } from "@/lib/type/users";
+import UserInfomation from "./UserInfomation";
+import UserOrder from "./UserOrder";
 
 export default function UserForm({ data }: { data: Users[] }) {
   const handleClick = () => {
@@ -34,6 +36,8 @@ export default function UserForm({ data }: { data: Users[] }) {
         w={150}
         className="form_controller rounded-lg"
       >
+        <UserInfomation />
+        <UserOrder />
         <UserFormLogout />
       </Flex>
     </Flex>

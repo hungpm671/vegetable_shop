@@ -2,13 +2,14 @@ import React from "react";
 import { Flex, Grid, GridItem, Heading, Image, Text } from "@chakra-ui/react";
 import { FaHandsHelping, FaSeedling, FaShippingFast } from "react-icons/fa";
 import { BiSolidLike } from "react-icons/bi";
+import { macondo } from "@/fonts/Macondo";
 
 export default function FreshIntro() {
   return (
     <Flex
       className="max-w-7xl"
       flexDir={"column"}
-      marginBlock={50}
+      paddingBlock={"60px"}
       id="about"
       marginInline={{ base: 5, md: 10, xl: "auto" }}
     >
@@ -18,6 +19,7 @@ export default function FreshIntro() {
         textAlign={"center"}
         mb={30}
         fontWeight={700}
+        className={macondo.className}
       >
         Giới Thiệu
       </Heading>
@@ -33,7 +35,12 @@ export default function FreshIntro() {
         >
           <Flex flexDir={"column"} alignItems={"center"}>
             <FaSeedling size={24} className="text-green-600" />
-            <Heading fontSize={24} fontWeight={700} textAlign={"center"}>
+            <Heading
+              className={macondo.className}
+              fontSize={24}
+              fontWeight={700}
+              textAlign={"center"}
+            >
               Nguồn gốc rõ ràng
             </Heading>
             <Text textAlign={"center"}>
@@ -46,7 +53,12 @@ export default function FreshIntro() {
 
           <Flex flexDir={"column"} alignItems={"center"}>
             <FaShippingFast size={24} className="text-red-600" />
-            <Heading fontSize={24} fontWeight={700} textAlign={"center"}>
+            <Heading
+              className={macondo.className}
+              fontSize={24}
+              fontWeight={700}
+              textAlign={"center"}
+            >
               Dịch vụ vận chuyển nhanh chóng
             </Heading>
             <Text textAlign={"center"}>
@@ -75,7 +87,12 @@ export default function FreshIntro() {
         >
           <Flex flexDir={"column"} alignItems={"center"}>
             <BiSolidLike size={24} className="text-blue-600" />
-            <Heading fontSize={24} fontWeight={700} textAlign={"center"}>
+            <Heading
+              className={macondo.className}
+              fontSize={24}
+              fontWeight={700}
+              textAlign={"center"}
+            >
               Chất lượng đảm bảo
             </Heading>
             <Text textAlign={"center"}>
@@ -88,7 +105,12 @@ export default function FreshIntro() {
 
           <Flex flexDir={"column"} alignItems={"center"}>
             <FaHandsHelping size={24} />
-            <Heading fontSize={24} fontWeight={700} textAlign={"center"}>
+            <Heading
+              className={macondo.className}
+              fontSize={24}
+              fontWeight={700}
+              textAlign={"center"}
+            >
               Dịch vụ khách hàng chuyên nghiệp
             </Heading>
             <Text textAlign={"center"}>
