@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { Districts, Provinces, Ward } from "./provinces";
 
 export interface Users {
   _id: mongoose.Types.ObjectId;
@@ -30,8 +31,21 @@ export interface Cart {
 
 export interface Order {
   _id: mongoose.Types.ObjectId;
+  customer_name: string;
+  customer_email: string;
+  customer_phone: string;
   products: Cart[];
   total_orders: number;
   state: string;
+  payment_method: string;
+  payment_status: boolean;
+  address: string;
+  ward: Ward;
+  district: Districts;
+  province: Provinces;
+  country: string;
+  delivery_time: string;
+  delivery_fee: number;
+  note: string;
   createdAt: Date;
 }

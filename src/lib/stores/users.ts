@@ -5,6 +5,12 @@ interface UserState {
   userEmail: string;
   setUserEmail: (email: string) => void;
 
+  userPhone: string;
+  setUserPhone: (phone: string) => void;
+
+  userName: string;
+  setUserName: (name: string) => void;
+
   cartUser: Cart[];
   setCartUser: (cart: Cart[]) => void;
 
@@ -22,6 +28,12 @@ interface UserState {
 export const useUsersStore = create<UserState>()((set) => ({
   userEmail: "",
   setUserEmail: (email) => set(() => ({ userEmail: email })),
+
+  userPhone: "",
+  setUserPhone: (phone) => set(() => ({ userPhone: phone })),
+
+  userName: "",
+  setUserName: (name) => set(() => ({ userName: name })),
 
   cartUser: [],
   setCartUser: (cart: Cart[]) => set(() => ({ cartUser: cart })),

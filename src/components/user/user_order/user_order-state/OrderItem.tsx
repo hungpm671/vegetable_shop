@@ -13,7 +13,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getVegetableFruitItem } from "@/_action/vegetableItemAction";
 import { SkeletonCircle } from "@/components/ui/skeleton";
 import { Cart } from "@/lib/type/users";
-import CalculateSalePrice from "../../../../utils/CalculateSalePrice";
+import CalculateSalePrice from "../../../../../utils/CalculateSalePrice";
 
 export default function OrderItem({ item }: { item: Cart }) {
   const { data, isLoading } = useQuery({
@@ -36,7 +36,7 @@ export default function OrderItem({ item }: { item: Cart }) {
   const vegetable = data[0];
 
   return (
-    <Flex gap={3} padding={"5px"} borderBottom={"1px solid gray"}>
+    <Flex gap={3} paddingBlock={"5px"}>
       <Image src={vegetable.image} alt={vegetable.name} w={"60px"} h={"60px"} />
 
       <Box w={"full"}>

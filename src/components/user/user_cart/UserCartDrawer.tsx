@@ -15,44 +15,16 @@ import {
 } from "@/components/ui/drawer";
 import { useState } from "react";
 import { TiShoppingCart } from "react-icons/ti";
-import TotalCart from "../../../../utils/TotalCart";
 import { EmptyState } from "@/components/ui/empty-state";
 import { LuShoppingCart } from "react-icons/lu";
 import ProductCartItem from "@/components/fresh_basket-home/FreshProductCart/ProductCartItem";
 import { useUsersStore } from "@/lib/stores/users";
-import { orderByUser } from "@/_action/userAction";
-import { toaster } from "@/components/ui/toaster";
+import OrderInformation from "../user_order/user_order-info.tsx/OrderInformation";
 
 const UserCartDrawer = ({ userId }: { userId: string }) => {
-  const { cartUser, setCartUser } = useUsersStore((state) => state);
+  const { cartUser } = useUsersStore((state) => state);
 
   const [open, setOpen] = useState(false);
-
-  const handleOrder = async () => {
-    if (userId) {
-      const result = await orderByUser(userId, cartUser);
-
-      if (result.errorMsg) {
-        toaster.create({
-          title: "Thất bại",
-          type: "warning",
-          description: `"Error adding product to cart:" ${result.errorMsg}`,
-        });
-      } else {
-        setCartUser([]);
-        toaster.success({
-          title: "Đặt hàng thành công!",
-          description: result.message,
-        });
-      }
-    } else {
-      toaster.create({
-        title: "Warning",
-        type: "warning",
-        description: "User not logged in, please login to add product to cart.",
-      });
-    }
-  };
 
   return (
     <DrawerRoot open={open} onOpenChange={(e) => setOpen(e.open)} size="md">
@@ -88,17 +60,8 @@ const UserCartDrawer = ({ userId }: { userId: string }) => {
         </DrawerBody>
 
         <DrawerFooter>
-          {cartUser.length > 0 && (
-            <Button
-              bgColor={"green.500"}
-              paddingInline={"10px"}
-              color={"white"}
-              fontWeight={700}
-              onClick={handleOrder}
-            >
-              <TotalCart />
-            </Button>
-          )}
+          {cartUser.length > 0 && <OrderInformation userId={userId} />}
+
           <DrawerActionTrigger asChild>
             <Button
               variant="outline"

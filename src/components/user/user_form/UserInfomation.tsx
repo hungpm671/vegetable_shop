@@ -17,40 +17,35 @@ import { getUserInfo, updateUserInfo } from "@/_action/userAction";
 import { FaPencilAlt } from "react-icons/fa";
 import { Editable, IconButton } from "@chakra-ui/react";
 import { LuCheck, LuPencilLine, LuX } from "react-icons/lu";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { toaster } from "@/components/ui/toaster";
 import dateFormat from "../../../../utils/DateFormat";
+import { useUsersStore } from "@/lib/stores/users";
 
 const UserInfomation = () => {
-  const [fullname, setFullname] = useState("");
-  const [phonenumber, setPhonenumber] = useState("");
-  const [address, setAddress] = useState("");
+  const { userName, userPhone, setUserName, setUserPhone } = useUsersStore(
+    (state) => state
+  );
 
   const userId =
     typeof window !== "undefined" ? sessionStorage.getItem("userId") : null;
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isSuccess } = useQuery({
     queryKey: ["userId", userId],
     queryFn: async () => await getUserInfo(userId!),
     enabled: !!userId,
   });
 
   useEffect(() => {
-    if (data) {
-      setFullname(data[0]?.full_name);
-      setPhonenumber(data[0]?.phone_number);
-      setAddress(data[0]?.address);
+    if (isSuccess && data) {
+      setUserName(data[0]?.full_name);
+      setUserPhone(data[0]?.phone_number);
     }
-  }, [data]);
+  }, [isSuccess, data]);
 
   const handleUpdateFullnameUser = async () => {
     if (userId) {
-      const result = await updateUserInfo(
-        userId,
-        fullname,
-        phonenumber,
-        address
-      );
+      const result = await updateUserInfo(userId, userName, userPhone);
       if (result.errorMsg) {
         toaster.error({
           title: "Thông báo",
@@ -61,9 +56,6 @@ const UserInfomation = () => {
           title: "Cập nhật thành công",
           description: result.message,
         });
-        setFullname(fullname);
-        setPhonenumber(phonenumber);
-        setAddress(address);
       }
     }
   };
@@ -107,10 +99,10 @@ const UserInfomation = () => {
                     />
 
                     <Editable.Root
-                      defaultValue={fullname}
+                      defaultValue={userName}
                       activationMode="dblclick"
                       onChange={(e) =>
-                        setFullname((e.target as HTMLInputElement).value)
+                        setUserName((e.target as HTMLInputElement).value)
                       }
                     >
                       <Editable.Preview />
@@ -151,54 +143,15 @@ const UserInfomation = () => {
                 value={
                   <Editable.Root
                     defaultValue={
-                      data[0]?.phone_number ? String(phonenumber) : ""
+                      data[0]?.phone_number ? String(userPhone) : ""
                     }
                     activationMode="dblclick"
                     onChange={(e) =>
-                      setPhonenumber((e.target as HTMLInputElement).value)
+                      setUserPhone((e.target as HTMLInputElement).value)
                     }
                   >
                     <Editable.Preview />
                     <Editable.Input />
-                    <Editable.Control>
-                      <Editable.EditTrigger asChild>
-                        <IconButton variant="ghost" size="xs">
-                          <LuPencilLine />
-                        </IconButton>
-                      </Editable.EditTrigger>
-                      <Editable.CancelTrigger
-                        asChild
-                        onClick={() => console.log("cancel")}
-                      >
-                        <IconButton variant="outline" size="xs">
-                          <LuX />
-                        </IconButton>
-                      </Editable.CancelTrigger>
-                      <Editable.SubmitTrigger
-                        asChild
-                        onClick={handleUpdateFullnameUser}
-                      >
-                        <IconButton variant="outline" size="xs">
-                          <LuCheck />
-                        </IconButton>
-                      </Editable.SubmitTrigger>
-                    </Editable.Control>
-                  </Editable.Root>
-                }
-              />
-
-              <DataListItem
-                label="Địa chỉ"
-                value={
-                  <Editable.Root
-                    defaultValue={address}
-                    activationMode="dblclick"
-                    onChange={(e) =>
-                      setAddress((e.target as HTMLInputElement).value)
-                    }
-                  >
-                    <Editable.Preview />
-                    <Editable.Textarea />
                     <Editable.Control>
                       <Editable.EditTrigger asChild>
                         <IconButton variant="ghost" size="xs">

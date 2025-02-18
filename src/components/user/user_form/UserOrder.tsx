@@ -13,13 +13,13 @@ import { PiClockCountdown } from "react-icons/pi";
 import { FaShippingFast } from "react-icons/fa";
 import { Heading, Stack } from "@chakra-ui/react";
 import { AccordionRoot } from "@/components/ui/accordion";
-import OrderPending from "../user_order-state/order_pending&waiting/OrderPending";
-import OrderWaiting from "../user_order-state/order_pending&waiting/OrderWaiting";
-import OrderShipping from "../user_order-state/order_shipping&completed/OrderShipping";
-import OrderCompleted from "../user_order-state/order_shipping&completed/OrderCompleted";
+import OrderPending from "../user_order/user_order-state/order_pending&waiting/OrderPending";
+import OrderWaiting from "../user_order/user_order-state/order_pending&waiting/OrderWaiting";
+import OrderShipping from "../user_order/user_order-state/order_shipping&completed/OrderShipping";
+import OrderCompleted from "../user_order/user_order-state/order_shipping&completed/OrderCompleted";
+import OrderCanceled from "../user_order/user_order-state/order_return&canceled/OrderCanceled";
+import OrderReturn from "../user_order/user_order-state/order_return&canceled/OrderReturn";
 import { TbCancel } from "react-icons/tb";
-import OrderCanceled from "../user_order-state/order_return&canceled/OrderCanceled";
-import OrderReturn from "../user_order-state/order_return&canceled/OrderReturn";
 import { EmptyState, VStack } from "@chakra-ui/react";
 import { AiOutlineFileSearch } from "react-icons/ai";
 import { useQuery } from "@tanstack/react-query";
@@ -45,30 +45,29 @@ export default function UserOrder() {
     enabled: !!userId,
   });
 
-  if (isLoading) {
-    return <EmptyOrders />;
-  }
-
-  const userOrders = data[0].orders;
+  const userOrders = data?.[0]?.orders || []; // Đảm bảo không bị lỗi nếu `data` chưa có
 
   useEffect(() => {
-    if (userOrders.length) {
-      const status = {
-        pending: userOrders.some((order: Order) => order.state === "pending"),
-        waiting: userOrders.some((order: Order) => order.state === "waiting"),
-        shipping: userOrders.some((order: Order) => order.state === "shipping"),
-        completed: userOrders.some(
-          (order: Order) => order.state === "completed"
-        ),
-        canceled: userOrders.some((order: Order) => order.state === "canceled"),
-        returns: userOrders.some((order: Order) => order.state === "return"),
-      };
-      setOrderStatus(status);
-    }
-  }, [userOrders]);
+    if (!userOrders.length) return; // Điều kiện đặt bên trong useEffect
+
+    const status = {
+      pending: userOrders.some((order: Order) => order.state === "pending"),
+      waiting: userOrders.some((order: Order) => order.state === "waiting"),
+      shipping: userOrders.some((order: Order) => order.state === "shipping"),
+      completed: userOrders.some((order: Order) => order.state === "completed"),
+      canceled: userOrders.some((order: Order) => order.state === "canceled"),
+      returns: userOrders.some((order: Order) => order.state === "return"),
+    };
+
+    setOrderStatus(status);
+  }, [userOrders]); // useEffect luôn được gọi, nhưng có thể return sớm
 
   const { pending, waiting, shipping, completed, canceled, returns } =
     orderStatus;
+
+  if (isLoading) {
+    return <EmptyOrders />;
+  }
 
   return (
     <DrawerRoot size="md">

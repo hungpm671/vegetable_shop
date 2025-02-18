@@ -6,6 +6,7 @@ import { CalculateWeightPrice } from "../../utils/CalculateWeightPrice";
 import mongoose from "mongoose";
 import CalculateSalePrice from "../../utils/CalculateSalePrice";
 import { Cart } from "@/lib/type/users";
+import { Districts, Provinces, Ward } from "@/lib/type/provinces";
 
 // checking information about user
 export async function checkUserInfo(params: string) {
@@ -223,8 +224,7 @@ export async function registerUser(
 export async function updateUserInfo(
   userId: string,
   full_name: string,
-  phone_number: string,
-  address: string
+  phone_number: string
 ) {
   try {
     await connectToDB();
@@ -237,7 +237,6 @@ export async function updateUserInfo(
         $set: {
           full_name: full_name,
           phone_number: phone_number,
-          address: address,
           updatedAt: new Date(),
         },
       }
@@ -257,11 +256,36 @@ export async function updateUserInfo(
 }
 
 // order
-export async function orderByUser(userId: string, cartUser: Cart[]) {
+export async function orderByUser({
+  userId,
+  cartUser,
+  selectedProvince,
+  selectedDistrict,
+  selectedWard,
+  address,
+  userName,
+  userPhone,
+  userEmail,
+  note,
+}: {
+  userId: string;
+  cartUser: Cart[];
+  selectedProvince: Provinces;
+  selectedDistrict: Districts;
+  selectedWard: Ward;
+  address: string;
+  userName: string;
+  userPhone: string;
+  userEmail: string;
+  note: string;
+}) {
   try {
     await connectToDB();
 
     const newOrderItem = {
+      customer_name: userName,
+      customer_email: userEmail,
+      customer_phone: userPhone,
       products: [...cartUser],
       total_orders: Number(
         cartUser.reduce(
@@ -271,10 +295,17 @@ export async function orderByUser(userId: string, cartUser: Cart[]) {
         )
       ),
       state: "pending",
-      createdAt: new Date(),
+      payment_method: "cod",
+      payment_status: false,
+      address: address,
+      ward: { ...selectedWard },
+      district: { ...selectedDistrict },
+      province: { ...selectedProvince },
+      country: "Việt Nam",
+      delivery_time: "",
+      delivery_fee: 30000,
+      note: note,
     };
-
-    console.log(userId, newOrderItem);
 
     const result = await UsersModel.updateOne(
       { _id: userId },
